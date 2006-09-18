@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser">
+
+  <menu
+      id="object_buttons"
+      title="Plone Content Drop-Down Menu"
+      />
+      
+  <menuItem
+      menu="object_buttons"
+      for="p4a.calendar.interfaces.IPossibleCalendar"
+      title="Configure Calendar"
+      action="${object_url}/calendar-config.html"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <page
+      name="calendar-config.html"
+      for="p4a.calendar.interfaces.IPossibleCalendar"
+      permission="cmf.ModifyPortalContent"
+      class=".config.ConfigView"
+      />
+
+</configure>

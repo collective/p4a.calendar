@@ -1,6 +1,8 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five">
+    xmlns="http://namespaces.zope.org/zope">
+    
+  <include package=".atct" />
 
+  <include package=".browser" />
 
 </configure>

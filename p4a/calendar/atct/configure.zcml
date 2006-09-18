@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five">
+    
+  <five:implements
+      class="Products.ATContentTypes.content.folder.ATFolder"
+      interface="p4a.calendar.interfaces.IPossibleCalendar"
+      />
+
+  <five:implements
+      class="Products.ATContentTypes.content.folder.ATBTreeFolder"
+      interface="p4a.calendar.interfaces.IPossibleCalendar"
+      />
+
+  <five:traversable
+      class="Products.ATContentTypes.content.folder.ATBTreeFolder"
+      />
+  <five:traversable
+      class="Products.ATContentTypes.content.folder.ATFolder"
+      />
+
+</configure>
