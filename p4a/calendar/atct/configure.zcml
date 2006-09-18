@@ -19,4 +19,6 @@
       class="Products.ATContentTypes.content.folder.ATFolder"
       />
 
+  <adapter factory=".calendar.FolderCalendarConfig" />
+
 </configure>
