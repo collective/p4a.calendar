@@ -21,4 +21,12 @@
       class=".config.ConfigView"
       />
 
+  <page
+      name="folder_listing"
+      for="p4a.calendar.interfaces.ICalendarEnhanced"
+      permission="zope2.View"
+      class=".event.MonthView"
+      template="month.pt"
+      />
+
 </configure>

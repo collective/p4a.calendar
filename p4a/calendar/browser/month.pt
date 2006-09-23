@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/@@standard_macros/view"
+      i18n:domain="plone">
+
+<head>
+
+  <tal:block metal:fill-slot="style_slot">
+  <style type="text/css" 
+         media="all"
+         tal:content=
+          "string: @import url(${context/++resource++p4acalendar/calendar.css});">
+  </style>
+  <script type="text/javascript" src="./calviews_js/calviews.js"
+          tal:attributes="src string:${context/++resource++p4acalendar/calendar.js}">
+  </script>
+  </tal:block>
+  
+</head>
+
+<body>
+
+<div metal:fill-slot="body">
+
+no calendar here yet
+
+</div> <!-- end main fill slot -->
+
+</body>
+</html>
