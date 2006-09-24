@@ -1,6 +1,7 @@
 import datetime
 import calendar
 from Products.CMFCore import utils as cmfutils
+from DateTime import DateTime
 
 DAYS = [
         'Monday', 
@@ -11,6 +12,10 @@ DAYS = [
         'Saturday'
         'Sunday',                 
         ]
+
+def dt2DT(dt):
+    s = "%04i-%02i-%02i %02i:%02i" % (dt.year, dt.month, dt.day, dt.hour, dt.minute)
+    return DateTime(s)
 
 class MonthView(object):
     """View for a month.
@@ -136,7 +141,7 @@ class MonthView(object):
         return weeks
 
     def _fill_events(self, days):
-        default = self.default_date
+        default = self.default_day
         
         start = datetime.datetime(default.year, default.month, 1, 0, 0)
         
@@ -147,7 +152,7 @@ class MonthView(object):
             end = datetime.datetime(default.year, default.month, 31, 23, 59)
         
         catalog = cmfutils.getToolByName(self.context, 'portal_catalog')
-        #catalog(portal_type='Event',
-        #        start=None,
-        #        end=None)
+        catalog(portal_type='Event',
+                start=dt2DT(start),
+                end=dt2DT(end))
 
