@@ -31,6 +31,7 @@
       <div tal:attributes="class string:day ${day/extrastyleclass}"
            tal:content="day/day"></div>
       </tal:block>
+      <div class="visualClear"></div>
     </div>
 
     <div tal:repeat="week view/weeks"

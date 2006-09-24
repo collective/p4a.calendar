@@ -29,6 +29,15 @@
 }
 
 .p4acalendar .standard-week-days .day {
+    font-size: 0.8em;
+}
+
+.p4acalendar .standard-week-days .day.first-week-day {
+    border-left: 1px transparent solid;    
+}
+
+.p4acalendar .standard-week-days .day {
+    border-right: 1px transparent solid;
 }
 
 .p4acalendar .week .day {

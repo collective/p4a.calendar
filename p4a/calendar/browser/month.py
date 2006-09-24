@@ -9,7 +9,7 @@ DAYS = [
         'Wednesday', 
         'Thursday', 
         'Friday', 
-        'Saturday'
+        'Saturday',
         'Sunday',                 
         ]
 
@@ -38,12 +38,37 @@ class MonthView(object):
         
         return datetime.datetime(year, month, 1)
 
-    def standard_week_days(self):
-        days = [{'day': x} for x in DAYS[calendar.firstweekday():]]
-        days += [{'day': x} for x in DAYS[0:calendar.firstweekday()]]
+    @property
+    def firstweekday(self):
+        return calendar.firstweekday()
+
+    def standard_week_days(self, firstweekday=None):
+        """Return the standard days of the week starting with the day
+        that is most appropriate as the start day for the current locale.
+        
+        As an example, make sure using 6 as the first work day chooses a 
+        week starting with Sunday.
+        
+          >>> mt = MonthView()
+          >>> days = mt.standard_week_days(6)
+          >>> days[0]
+          {'extrastyleclass': 'first-week-day', 'day': 'Sunday'}
+          >>> days[-1]
+          {'extrastyleclass': 'last-week-day', 'day': 'Saturday'}
+        """
+        
+        if firstweekday is None:
+            firstweekday = self.firstweekday
+        
+        days = [{'day': x,
+                 'extrastyleclass': ''} for x in DAYS[firstweekday:]]
+        days += [{'day': x,
+                  'extrastyleclass': ''} for x in DAYS[0:firstweekday]]
 
         days[0]['extrastyleclass'] = 'first-week-day'
         days[-1]['extrastyleclass'] = 'last-week-day'
+        
+        return days
 
     def weeks(self, daydate=None):
         """Return as a list of of the (partial or full) weeks of the
@@ -69,15 +94,15 @@ class MonthView(object):
         First day of the week period should be an outside month day.
         
           >>> weeks[0]['days'][0]
-          {'extrastyleclass': ' outside-month first-week-day', 'day': None}
+          {'extrastyleclass': ' outside-month first-week-day', 'events': [], 'day': None}
 
           >>> weeks[4]['days'][0]
-          {'extrastyleclass': ' first-week-day', 'day': 27}
+          {'extrastyleclass': ' first-week-day', 'events': [], 'day': 27}
           
         Inspect the last day.  Should be outside the month as well.
         
           >>> weeks[-1]['days'][-1]
-          {'extrastyleclass': ' outside-month last-week-day', 'day': None}
+          {'extrastyleclass': ' outside-month last-week-day', 'events': [], 'day': None}
           
         """
 
@@ -138,6 +163,9 @@ class MonthView(object):
         return weeks
 
     def _fill_events(self, days):
+        if not hasattr(self, 'context'):
+            return
+
         default = self.default_day
         
         start = datetime.datetime(default.year, default.month, 1, 0, 0)
