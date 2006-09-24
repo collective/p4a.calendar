@@ -1,5 +1,6 @@
 import datetime
 import calendar
+from Products.CMFCore import utils as cmfutils
 
 DAYS = [
         'Monday', 
@@ -85,6 +86,7 @@ class MonthView(object):
         
         weektuples = list(calendar.monthcalendar(daydate.year, daydate.month))
         weeks = []
+        alldays = {}
         for weekpos, weektuple in enumerate(weektuples):
             week = {'days': []}
             weeks.append(week)
@@ -99,6 +101,9 @@ class MonthView(object):
             for daypos, weekday in enumerate(weektuple):
                 day = {}
                 week['days'].append(day)
+                
+                if weekday:
+                    alldays[datetime.date(daydate.year, daydate.month, weekday)] = day
                 
                 day['extrastyleclass'] = ''
                 
@@ -126,4 +131,23 @@ class MonthView(object):
                 day['extrastyleclass'] += ' last-month-day'
                 break
         
+        self._fill_events(alldays)
+        
         return weeks
+
+    def _fill_events(self, days):
+        default = self.default_date
+        
+        start = datetime.datetime(default.year, default.month, 1, 0, 0)
+        
+        if default.month < 12:
+            end = datetime.datetime(default.year, default.month+1, 1, 23, 59)
+            end -= datetime.timedelta(days=1)
+        elif default.month == 12:
+            end = datetime.datetime(default.year, default.month, 31, 23, 59)
+        
+        catalog = cmfutils.getToolByName(self.context, 'portal_catalog')
+        #catalog(portal_type='Event',
+        #        start=None,
+        #        end=None)
+
