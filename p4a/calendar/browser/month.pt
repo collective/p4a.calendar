@@ -26,6 +26,17 @@
      class="p4acalendar">
 
   <div class="month">
+  
+    <h1>
+      <a href=""
+         class="previous"
+         tal:attributes="href view/prev_month_link">&larr;</a>
+      <span tal:replace="view/month"></span> <span tal:replace="view/year"></span>
+      <a href=""
+         class="next"
+         tal:attributes="href view/next_month_link">&rarr;</a>
+    </h1>
+  
     <div class="standard-week-days">
       <tal:block tal:repeat="day view/standard_week_days">
       <div tal:attributes="class string:day ${day/extrastyleclass}"

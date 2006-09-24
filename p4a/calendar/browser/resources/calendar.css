@@ -1,5 +1,10 @@
 
-.p4acalendar.month {
+.p4acalendar .month H1 {
+    font-size: 1em;
+}
+
+.p4acalendar .month H1 A {
+    text-decoration: none;
 }
 
 .p4acalendar .week .day DL {

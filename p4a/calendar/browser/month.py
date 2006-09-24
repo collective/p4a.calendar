@@ -13,6 +13,22 @@ DAYS = [
         'Sunday',                 
         ]
 
+MONTHS = [
+          'N/A',
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+          ]
+
 def dt2DT(dt):
     s = "%04i-%02i-%02i %02i:%02i" % (dt.year, dt.month, dt.day, dt.hour, dt.minute)
     return DateTime(s)
@@ -23,8 +39,12 @@ class MonthView(object):
 
     @property
     def default_day(self):
+        if hasattr(self, '__default_day'):
+            return self.__default_day
+        
         if not hasattr(self, 'request'):
-            return datetime.datetime.today()
+            self.__default_day = datetime.datetime.today()
+            return self.__default_day
         
         year = self.request.form.get('year', None)
         month = self.request.form.get('month', None)
@@ -36,7 +56,9 @@ class MonthView(object):
         year = int(year)
         month = int(month)
         
-        return datetime.datetime(year, month, 1)
+        self.__default_day = datetime.datetime(year, month, 1)
+        
+        return self.__default_day
 
     @property
     def firstweekday(self):
@@ -187,3 +209,42 @@ class MonthView(object):
                                brain.start.day())
             day = days[dt]
             day['events'].append(brain)
+
+    def month(self):
+        return MONTHS[self.default_day.month]
+    
+    def year(self):
+        return '%04i' % self.default_day.year
+
+    def _link(self, dt):
+        return '%s?year=%s&month=' % (self.context.absolute_url(),
+                                      next.year,
+                                      next.month)
+
+    def next_month_link(self):
+        year = self.default_day.year
+        month = self.default_day.month
+        
+        if month == 12:
+            month = 1
+            year += 1
+        else:
+            month += 1
+        
+        return '%s?year=%s&month=%s' % (self.context.absolute_url(),
+                                        year,
+                                        month)
+
+    def prev_month_link(self):
+        year = self.default_day.year
+        month = self.default_day.month
+        
+        if month == 1:
+            month = 12
+            year -= 1
+        else:
+            month -= 1
+        
+        return '%s?year=%s&month=%s' % (self.context.absolute_url(),
+                                        year,
+                                        month)
