@@ -1,0 +1,41 @@
+
+.p4acalendar.month {
+}
+
+.p4acalendar .day LABEL {
+    color: #666;
+}
+
+
+.p4acalendar .day {
+    float: left;
+    width: 13%;
+    height: 6em;
+}
+
+
+/* begin default horizontal lines */
+
+.p4acalendar .day {
+    border-bottom: 1px #666 solid;
+}
+
+.p4acalendar .first-week .day {
+    border-top: 1px #666 solid;
+    border-bottom: 1px #666 solid;
+}
+
+/* end default horizontal lines */
+
+
+/* begin default vertical lines */
+
+.p4acalendar .day {
+    border-right: 1px #666 solid;
+}
+
+.p4acalendar .day.first-week-day {
+    border-left: 1px #666 solid;
+}
+
+/* end default vertical lines */

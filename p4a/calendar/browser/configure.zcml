@@ -1,6 +1,12 @@
 <configure
     xmlns="http://namespaces.zope.org/browser">
 
+  <resourceDirectory
+      name="p4acalendar"
+      directory="resources"
+      permission="zope2.Public"
+      />
+
   <menu
       id="object_buttons"
       title="Plone Content Drop-Down Menu"
@@ -25,7 +31,7 @@
       name="folder_listing"
       for="p4a.calendar.interfaces.ICalendarEnhanced"
       permission="zope2.View"
-      class=".event.MonthView"
+      class=".month.MonthView"
       template="month.pt"
       />
 

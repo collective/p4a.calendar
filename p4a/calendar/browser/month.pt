@@ -2,29 +2,43 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="context/@@standard_macros/view"
+      metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
 
 <head>
 
-  <tal:block metal:fill-slot="style_slot">
+  <metal:block metal:fill-slot="head_slot">
   <style type="text/css" 
          media="all"
          tal:content=
           "string: @import url(${context/++resource++p4acalendar/calendar.css});">
   </style>
-  <script type="text/javascript" src="./calviews_js/calviews.js"
+  <script type="text/javascript" src="calendar.js"
           tal:attributes="src string:${context/++resource++p4acalendar/calendar.js}">
   </script>
-  </tal:block>
+  </metal:block>
   
 </head>
 
 <body>
 
-<div metal:fill-slot="body">
+<div metal:fill-slot="main">
 
-no calendar here yet
+  <div class="month p4acalendar">
+    <div tal:repeat="week view/weeks"
+         class="week"
+         tal:attributes="class string:week ${week/extrastyleclass}">
+         
+       <div tal:repeat="day week/days"
+            tal:attributes="class string:day ${day/extrastyleclass}"
+            class="day">
+            
+            <label tal:condition="day/day" tal:content="day/day"></label>
+            <span tal:condition="not:day/day">&nbsp;</span>
+       </div>
+       <div class="visualClear"></div>
+    </div>
+  </div>
 
 </div> <!-- end main fill slot -->
 
