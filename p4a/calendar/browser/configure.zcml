@@ -4,7 +4,7 @@
   <resourceDirectory
       name="p4acalendar"
       directory="resources"
-      permission="zope2.Public"
+      permission="zope2.View"
       />
 
   <menu

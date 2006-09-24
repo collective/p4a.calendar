@@ -1,6 +1,7 @@
 
 .p4acalendar .month H1 {
     font-size: 1em;
+    margin-bottom: 1em;
 }
 
 .p4acalendar .month H1 A {
@@ -11,6 +12,16 @@
     color: #666;
     margin: 0;
     padding: 0.2em;
+}
+
+/* for some reason IE doesn't like the separaters here */
+.p4acalendar .standard-week-days .visualClear,
+.p4acalendar .week .visualClear {
+    display: none;
+}
+
+.p4acalendar .standard-week-days .day {
+    text-align: center;
 }
 
 .p4acalendar .week .day DL DT,
@@ -38,11 +49,11 @@
 }
 
 .p4acalendar .standard-week-days .day.first-week-day {
-    border-left: 1px transparent solid;    
+    border-left: 1px white solid;    
 }
 
 .p4acalendar .standard-week-days .day {
-    border-right: 1px transparent solid;
+    border-right: 1px white solid;
 }
 
 .p4acalendar .week .day {
