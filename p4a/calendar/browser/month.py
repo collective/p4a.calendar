@@ -1,7 +1,6 @@
 import datetime
 import calendar
-from Products.CMFCore import utils as cmfutils
-from DateTime import DateTime
+from p4a.calendar import interfaces
 
 DAYS = [
         'Monday', 
@@ -28,10 +27,6 @@ MONTHS = [
           'November',
           'December',
           ]
-
-def dt2DT(dt):
-    s = "%04i-%02i-%02i %02i:%02i" % (dt.year, dt.month, dt.day, dt.hour, dt.minute)
-    return DateTime(s)
 
 class MonthView(object):
     """View for a month.
@@ -198,12 +193,9 @@ class MonthView(object):
         elif default.month == 12:
             end = datetime.datetime(default.year, default.month, 31, 23, 59)
         
-        catalog = cmfutils.getToolByName(self.context, 'portal_catalog')
-        event_brains = catalog(portal_type='Event',
-                               start={'query': dt2DT(start), 'range': 'min'},
-                               end={'query': dt2DT(end), 'range': 'max'})
+        eventprovider = interfaces.IEventProvider(self.context)
 
-        for brain in event_brains:
+        for brain in eventprovider.gather_events(start, end):
             dt = datetime.date(brain.start.year(), 
                                brain.start.month(),
                                brain.start.day())

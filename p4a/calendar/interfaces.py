@@ -19,3 +19,13 @@ class ICalendarConfig(interface.Interface):
         description=u'Whether calendar capabilities are or should be '
                     u'activated on this item'
         )
+
+class IEventProvider(interface.Interface):
+    """Provides events.
+    """
+    
+    def gather_events(start, stop):
+        """Return all appropriate events for the given time interval.  The
+        *start* and *stop* arguments are expected to be python datetime
+        objects.
+        """

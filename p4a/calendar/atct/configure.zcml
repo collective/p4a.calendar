@@ -21,4 +21,6 @@
 
   <adapter factory=".calendar.FolderCalendarConfig" />
 
+  <adapter factory=".eventprovider.ATEventProvider" />
+
 </configure>
