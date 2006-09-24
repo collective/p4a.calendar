@@ -28,7 +28,7 @@
       />
 
   <page
-      name="folder_listing"
+      name="month.html"
       for="p4a.calendar.interfaces.ICalendarEnhanced"
       permission="zope2.View"
       class=".month.MonthView"
