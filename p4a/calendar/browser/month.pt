@@ -59,7 +59,8 @@
               <dd tal:repeat="event day/events">
                 <a class="event-title" 
                    tal:content="event/Title"
-                   tal:attributes="href event/getURL"></a>
+                   tal:attributes="href event/getURL;
+                                   title event/Description"></a>
               </dd>
             </dl>
        </div>

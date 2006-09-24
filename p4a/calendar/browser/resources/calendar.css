@@ -30,6 +30,11 @@
     margin: 0;
 }
 
+.p4acalendar .week .day DL DD {
+    text-indent: 16px;
+    background: url(event-icon.gif) no-repeat;
+}
+
 .p4acalendar .event-title {
     color: #666;
     font-size: 0.8em;
