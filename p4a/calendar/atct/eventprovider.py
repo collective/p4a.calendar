@@ -36,4 +36,5 @@ class TopicEventProvider(object):
         self.context = context
         
     def gather_events(self, start, stop):
-        return self.context.queryCatalog()
+        return (x for x in self.context.queryCatalog() 
+                if x.portal_type == 'Event')
