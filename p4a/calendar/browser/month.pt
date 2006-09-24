@@ -22,9 +22,17 @@
 
 <body>
 
-<div metal:fill-slot="main">
+<div metal:fill-slot="main"
+     class="p4acalendar">
 
-  <div class="month p4acalendar">
+  <div class="month">
+    <div class="standard-week-days">
+      <tal:block tal:repeat="day view/standard_week_days">
+      <div tal:attributes="class string:day ${day/extrastyleclass}"
+           tal:content="day/day"></div>
+      </tal:block>
+    </div>
+
     <div tal:repeat="week view/weeks"
          class="week"
          tal:attributes="class string:week ${week/extrastyleclass}">

@@ -2,25 +2,34 @@
 .p4acalendar.month {
 }
 
-.p4acalendar .day LABEL {
+.p4acalendar .week .day LABEL {
     color: #666;
 }
-
 
 .p4acalendar .day {
     float: left;
     width: 13%;
+}
+
+.p4acalendar .day.today {
+    background-color: #f4f6bf;
+}
+
+.p4acalendar .standard-week-days .day {
+}
+
+.p4acalendar .week .day {
     height: 6em;
 }
 
 
 /* begin default horizontal lines */
 
-.p4acalendar .day {
+.p4acalendar .week .day {
     border-bottom: 1px #666 solid;
 }
 
-.p4acalendar .first-week .day {
+.p4acalendar .week.first-week .day {
     border-top: 1px #666 solid;
     border-bottom: 1px #666 solid;
 }
@@ -30,11 +39,11 @@
 
 /* begin default vertical lines */
 
-.p4acalendar .day {
+.p4acalendar .week .day {
     border-right: 1px #666 solid;
 }
 
-.p4acalendar .day.first-week-day {
+.p4acalendar .week .day.first-week-day {
     border-left: 1px #666 solid;
 }
 
