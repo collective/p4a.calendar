@@ -35,6 +35,13 @@ class TopicEventProvider(object):
     def __init__(self, context):
         self.context = context
         
+    def acceptable_event(self, x, start, stop):
+        start = dt2DT(start)
+        stop = dt2DT(stop)
+        
+        return x.portal_type == 'Event' and x.start >= start and x.end <= stop
+    
     def gather_events(self, start, stop):
+        query = self.context.buildQuery()
         return (x for x in self.context.queryCatalog() 
-                if x.portal_type == 'Event')
+                if self.acceptable_event(x, start, stop))
