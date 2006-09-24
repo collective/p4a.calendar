@@ -21,9 +21,6 @@ class MonthView(object):
     """View for a month.
     """
 
-    def events_for_interval(self, start, stop):
-        pass
-
     @property
     def default_day(self):
         if not hasattr(self, 'request'):
@@ -104,7 +101,7 @@ class MonthView(object):
                 week['extrastyleclass'] += ' last-week'
 
             for daypos, weekday in enumerate(weektuple):
-                day = {}
+                day = {'events': []}
                 week['days'].append(day)
                 
                 if weekday:
@@ -152,7 +149,13 @@ class MonthView(object):
             end = datetime.datetime(default.year, default.month, 31, 23, 59)
         
         catalog = cmfutils.getToolByName(self.context, 'portal_catalog')
-        catalog(portal_type='Event',
-                start=dt2DT(start),
-                end=dt2DT(end))
+        event_brains = catalog(portal_type='Event',
+                               start={'query': dt2DT(start), 'range': 'min'},
+                               end={'query': dt2DT(end), 'range': 'max'})
 
+        for brain in event_brains:
+            dt = datetime.date(brain.start.year(), 
+                               brain.start.month(),
+                               brain.start.day())
+            day = days[dt]
+            day['events'].append(brain)

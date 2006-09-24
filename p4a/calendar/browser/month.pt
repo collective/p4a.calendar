@@ -41,8 +41,15 @@
             tal:attributes="class string:day ${day/extrastyleclass}"
             class="day">
             
-            <label tal:condition="day/day" tal:content="day/day"></label>
-            <span tal:condition="not:day/day">&nbsp;</span>
+            <dl>
+              <dt tal:condition="day/day" tal:content="day/day"></dt>
+              <dt tal:condition="not:day/day">&nbsp;</dt>
+              <dd tal:repeat="event day/events">
+                <a class="event-title" 
+                   tal:content="event/Title"
+                   tal:attributes="href event/getURL"></a>
+              </dd>
+            </dl>
        </div>
        <div class="visualClear"></div>
     </div>

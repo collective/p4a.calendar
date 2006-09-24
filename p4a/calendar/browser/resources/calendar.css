@@ -2,8 +2,21 @@
 .p4acalendar.month {
 }
 
-.p4acalendar .week .day LABEL {
+.p4acalendar .week .day DL {
     color: #666;
+    margin: 0;
+    padding: 0.2em;
+}
+
+.p4acalendar .week .day DL DT,
+.p4acalendar .week .day DL DD {
+    padding: 0;
+    margin: 0;
+}
+
+.p4acalendar .event-title {
+    color: #666;
+    font-size: 0.8em;
 }
 
 .p4acalendar .day {
