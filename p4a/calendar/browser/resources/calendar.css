@@ -35,18 +35,23 @@
 }
 
 .p4acalendar .week .day DL DD {
-    text-indent: 16px;
-    background: url(event-icon.gif) no-repeat;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
+    margin-bottom: -0.5em;
+    padding: 0;
 }
 
 .p4acalendar .event-title {
     color: #777;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .p4acalendar .day {
     float: left;
     width: 13%;
+    overflow: hidden;
 }
 
 .p4acalendar .day.today {
