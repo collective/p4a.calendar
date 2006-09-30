@@ -28,6 +28,93 @@ MONTHS = [
           'December',
           ]
 
+ONEDAY = datetime.timedelta(days=1)
+
+def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
+    """Return an iterable of week tuples where each element in the week
+    tuple is an instance of *datetime.date*.  If *datedate* is ommitted
+    then the date chosen is based on the *year* and *month*.
+    
+    The following are equivalent.
+    
+      >>> from datetime import date
+      >>> list(monthweeks(2006, 2)) == list(monthweeks(daydate=date(2006, 2, 13)))
+      True
+      
+    Now lets check out some week day values.
+    
+      >>> weeks = list(monthweeks(2006, 2, firstweekday=6))
+      
+    There will of course be 5 weeks.
+    
+      >>> len(weeks)
+      5
+
+    The first day of the first week will be January 1st, 2006.
+      
+      >>> weeks[0][0]
+      datetime.date(2006, 1, 29)
+      
+    The last day of the first week will be February 4, 2006.
+
+      >>> weeks[0][-1]
+      datetime.date(2006, 2, 4)
+      
+    The first day of the last week will be February 26, 2006.
+
+      >>> weeks[-1][0]
+      datetime.date(2006, 2, 26)
+
+    The last day of the last week will be March 4, 2006.
+    
+      >>> weeks[-1][-1]
+      datetime.date(2006, 3, 4)
+      
+    """
+    
+    if firstweekday == None:
+        firstweekday = calendar.firstweekday()
+
+    if firstweekday == 0:
+        lastweekday = 6
+    else:
+        lastweekday = firstweekday - 1
+    
+    if daydate is None:
+        today = datetime.date.today()
+        y = year or today.year
+        m = month or today.month
+        firstdate = datetime.date(y, m, 1)
+    else:
+        firstdate = datetime.date(daydate.year,
+                                  daydate.month,
+                                  1)
+
+    firstcalday = firstdate
+    while calendar.weekday(firstcalday.year, 
+                           firstcalday.month, 
+                           firstcalday.day) != firstweekday:
+        firstcalday -= ONEDAY
+    
+    done = False
+    weeks = []
+    day = firstcalday
+    weekday = calendar.weekday(day.year, day.month, day.day)
+    while 1:
+        if weekday == firstweekday:
+            week = []
+            weeks.append(week)
+        week.append(day)
+        
+        day += ONEDAY
+        weekday = calendar.weekday(day.year, day.month, day.day)
+
+        if (day.year > firstdate.year or day.month > firstdate.month) and weekday == lastweekday:
+            week.append(day)
+            break
+
+    return (tuple(x) for x in weeks)
+
 class MonthView(object):
     """View for a month.
     """
