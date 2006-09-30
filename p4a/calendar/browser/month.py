@@ -31,39 +31,28 @@ MONTHS = [
 
 ONEDAY = datetime.timedelta(days=1)
 
-def event_label(event):
+def tiny_time(dt):
     """Return a clean label representing the given event.
     
-    Here's the sort of object that is meant to represent an event.
+    Necessary imports.
     
       >>> from datetime import datetime
-      >>> def event(title, hour, minute):
-      ...     class Mock(object): pass
-      ...     event = Mock()
-      ...     event.start = datetime(2006, 9, 30, hour, minute)
-      ...     event.Title = title
-      ...     return event
       
     Make sure the label is clean.
     
-      >>> event_label(event('Some Event', 9, 30))
-      '9:30 Some Event'
+      >>> tiny_time(datetime(2006, 9, 30, 9, 30))
+      '9:30'
       
-      >>> event_label(event('Some Event', 9, 0))
-      '9 Some Event'
+      >>> tiny_time(datetime(2006, 9, 30, 9, 0))
+      '9'
 
-      >>> event_label(event('Some Event', 13, 0))
-      '1p Some Event'
+      >>> tiny_time(datetime(2006, 9, 30, 13, 0))
+      '1p'
 
-      >>> event_label(event('Some Event', 13, 20))
-      '1:20p Some Event'
+      >>> tiny_time(datetime(2006, 9, 30, 13, 20))
+      '1:20p'
     """
     
-    if not isinstance(event.start, datetime.date):
-        dt = eventprovider.DT2dt(event.start)
-    else:
-        dt = event.start
-
     ampm = ''
     hour = ''
     if dt.hour > 12:
@@ -77,7 +66,7 @@ def event_label(event):
     
     time = str(hour) + minutes + ampm
     
-    return time + ' ' + event.Title
+    return time
 
 def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     """Return an iterable of week tuples where each element in the week
@@ -402,8 +391,17 @@ class MonthView(object):
             day = days[dt]
             events = day['events']
             allevents = day['allevents']
-            event_dict = {'label': event_label(brain),
+            start = eventprovider.DT2dt(brain.start)
+            timespan = '%i:%02i%s to %i:%02i%s' % (brain.start.h_12(),
+                                                   brain.start.minute(),
+                                                   brain.start.ampm(),
+                                                   brain.end.h_12(),
+                                                   brain.end.minute(),
+                                                   brain.end.ampm())
+            event_dict = {'label': tiny_time(start) + ' ' + brain.Title,
+                          'timespan': timespan,
                           'url': brain.getURL(),
+                          'title': brain.Title,
                           'description': brain.Description}
             if len(events) < 2:
                 day['events'].append(event_dict)

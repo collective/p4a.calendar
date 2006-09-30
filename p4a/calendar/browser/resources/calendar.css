@@ -19,12 +19,14 @@
     padding: 0.2em;
 }
 
-.p4acalendar .week .day.outside-month DL {
-    color: #ccc;
-}
-
 .p4acalendar .week .day DT A {
     display: block;
+    color: #666;
+}
+
+.p4acalendar .week .day.outside-month DL,
+.p4acalendar .week .day.outside-month DL A {
+    color: #ccc;
 }
 
 /* for some reason IE doesn't like the separaters here */
@@ -34,7 +36,7 @@
 }
 
 .p4acalendar .day-event-popup {
-    background-color: white;
+    background-color: #f4f6bf;
     position: absolute;
     border: 1px black solid;
 }
@@ -46,7 +48,7 @@
 }
 
 .p4acalendar .day-event-popup LI {
-    border: 1px white solid;
+    border: 1px #f4f6bf solid;
     margin: 0;
     padding: 0;
 }
@@ -80,7 +82,7 @@
     padding: 0;
 }
 
-.p4acalendar DD {
+.p4acalendar .week .day DD {
     color: #777;
     font-size: 0.7em;
 }
@@ -120,17 +122,6 @@ in the active month have their grid lines lighter than the rest to
 make it obvious.
 */
 
-.p4acalendar .first-week .day.outside-month {
-    border-left: 1px #ccc solid;
-    border-top: 1px #ccc solid;
-}
-
-.p4acalendar .last-week .day.outside-month,
-.p4acalendar .last-week .day.outside-month.last-week-day {
-    border-bottom: 1px #ccc solid;
-    border-right: 1px #ccc solid;
-}
-
 .p4acalendar .week .day {
     border-left: 1px #777 solid;
     border-top: 1px #777 solid;
@@ -148,6 +139,17 @@ make it obvious.
 
 .p4acalendar .week .day.last-week-day {
     border-right: 1px #777 solid;
+}
+
+.p4acalendar .first-week .day.outside-month {
+    border-left: 1px #ccc solid;
+    border-top: 1px #ccc solid;
+}
+
+.p4acalendar .last-week .day.outside-month,
+.p4acalendar .last-week .day.outside-month.last-week-day {
+    border-bottom: 1px #ccc solid;
+    border-right: 1px #ccc solid;
 }
 
 /* end grid */

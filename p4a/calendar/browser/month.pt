@@ -44,11 +44,11 @@
            <dl>
              <dt>
                <a href=""
-                  tal:content="event/label"
+                  tal:content="event/title"
                   tal:attributes="href event/url"></a>
              </dt>
-             <dd tal:content="event/description">
-             </dd>
+             <dd tal:content="event/timespan"></dd>
+             <dd tal:content="event/description"></dd>
          </li>
        </ul>
      </div>
