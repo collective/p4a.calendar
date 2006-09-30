@@ -139,7 +139,7 @@ class MonthView(object):
 
             if weekpos == 0:
                 week['extrastyleclass'] += ' first-week'
-            elif weekpos == len(weektuples):
+            elif weekpos == len(weektuples)-1:
                 week['extrastyleclass'] += ' last-week'
 
             for daypos, weekday in enumerate(weektuple):
