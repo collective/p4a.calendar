@@ -9,9 +9,13 @@
 }
 
 .p4acalendar .week .day DL {
-    color: #666;
+    color: #777;
     margin: 0;
     padding: 0.2em;
+}
+
+.p4acalendar .week .day.outside-month DL {
+    color: #ccc;
 }
 
 /* for some reason IE doesn't like the separaters here */
@@ -36,7 +40,7 @@
 }
 
 .p4acalendar .event-title {
-    color: #666;
+    color: #777;
     font-size: 0.8em;
 }
 
@@ -53,41 +57,46 @@
     font-size: 0.8em;
 }
 
-.p4acalendar .standard-week-days .day.first-week-day {
-    border-left: 1px white solid;    
-}
-
-.p4acalendar .standard-week-days .day {
-    border-right: 1px white solid;
-}
-
 .p4acalendar .week .day {
     height: 6em;
 }
 
 
-/* begin default horizontal lines */
+/* grid start */
+/*
+The purpose here of a fancy grid is to make sure days that are not
+in the active month have their grid lines lighter than the rest to
+make it obvious.
+*/
+
+.p4acalendar .first-week .day.outside-month {
+    border-left: 1px #ccc solid;
+    border-top: 1px #ccc solid;
+}
+
+.p4acalendar .last-week .day.outside-month,
+.p4acalendar .last-week .day.outside-month.last-week-day {
+    border-bottom: 1px #ccc solid;
+    border-right: 1px #ccc solid;
+}
 
 .p4acalendar .week .day {
-    border-bottom: 1px #666 solid;
+    border-left: 1px #777 solid;
+    border-top: 1px #777 solid;
 }
 
-.p4acalendar .week.first-week .day {
-    border-top: 1px #666 solid;
-    border-bottom: 1px #666 solid;
+.p4acalendar .last-week .day {
+    border-bottom: 1px #777 solid;
+    border-left: 0;
+    border-right: 1px #777 solid;
 }
 
-/* end default horizontal lines */
-
-
-/* begin default vertical lines */
-
-.p4acalendar .week .day {
-    border-right: 1px #666 solid;
+.p4acalendar .last-week .day.first-week-day {
+    border-left: 1px #777 solid;
 }
 
-.p4acalendar .week .day.first-week-day {
-    border-left: 1px #666 solid;
+.p4acalendar .week .day.last-week-day {
+    border-right: 1px #777 solid;
 }
 
-/* end default vertical lines */
+/* end grid */
