@@ -1,6 +1,7 @@
 import datetime
 import calendar
 from p4a.calendar import interfaces
+from p4a.calendar.atct import eventprovider
 
 DAYS = [
         'Monday', 
@@ -29,6 +30,54 @@ MONTHS = [
           ]
 
 ONEDAY = datetime.timedelta(days=1)
+
+def event_label(event):
+    """Return a clean label representing the given event.
+    
+    Here's the sort of object that is meant to represent an event.
+    
+      >>> from datetime import datetime
+      >>> def event(title, hour, minute):
+      ...     class Mock(object): pass
+      ...     event = Mock()
+      ...     event.start = datetime(2006, 9, 30, hour, minute)
+      ...     event.Title = title
+      ...     return event
+      
+    Make sure the label is clean.
+    
+      >>> event_label(event('Some Event', 9, 30))
+      '9:30 Some Event'
+      
+      >>> event_label(event('Some Event', 9, 0))
+      '9 Some Event'
+
+      >>> event_label(event('Some Event', 13, 0))
+      '1p Some Event'
+
+      >>> event_label(event('Some Event', 13, 20))
+      '1:20p Some Event'
+    """
+    
+    if not isinstance(event.start, datetime.date):
+        dt = eventprovider.DT2dt(event.start)
+    else:
+        dt = event.start
+
+    ampm = ''
+    hour = ''
+    if dt.hour > 12:
+        hour = dt.hour - 12
+        ampm = 'p'
+    else:
+        hour = dt.hour
+    minutes = ''
+    if dt.minute != 0:
+        minutes = ':%02i' % dt.minute
+    
+    time = str(hour) + minutes + ampm
+    
+    return time + ' ' + event.Title
 
 def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     """Return an iterable of week tuples where each element in the week
@@ -206,22 +255,28 @@ class MonthView(object):
           
         First day of the week period should be an outside month day.
         
-          >>> weeks[0]['days'][0]
-          {'extrastyleclass': ' outside-month first-week-day', 'events': [], 'day': 30}
+          >>> weeks[0]['days'][0]['extrastyleclass']
+          ' outside-month first-week-day'
+          >>> weeks[0]['days'][0]['day']
+          30
 
-          >>> weeks[4]['days'][0]
-          {'extrastyleclass': ' first-week-day', 'events': [], 'day': 27}
+          >>> weeks[4]['days'][0]['extrastyleclass']
+          ' first-week-day'
+          >>> weeks[4]['days'][0]['day']
+          27
           
         Inspect the last day.  Should be outside the month as well.
         
-          >>> weeks[-1]['days'][-1]
-          {'extrastyleclass': ' outside-month last-week-day last-month-day', 'events': [], 'day': 5}
+          >>> weeks[-1]['days'][-1]['extrastyleclass']
+          ' outside-month last-week-day last-month-day'
+          >>> weeks[-1]['days'][-1]['day']
+          5
           
         Make sure if we use a different weekday things still work.
         
           >>> weeks = mt.weeks(datetime(2006, 2, 23), 0)
-          >>> weeks[0]['days'][0]
-          {'extrastyleclass': ' outside-month first-week-day', 'events': [], 'day': 30}
+          >>> weeks[0]['days'][0]['day']
+          30
           
         """
 
@@ -248,7 +303,9 @@ class MonthView(object):
                 week['extrastyleclass'] += ' last-week'
 
             for daypos, weekdate in enumerate(weektuple):
-                day = {'events': []}
+                day = {'events': [],
+                       'allevents': [],
+                       'has_more': False}
                 week['days'].append(day)
                 
                 alldays[weekdate] = day
@@ -280,9 +337,15 @@ class MonthView(object):
         
         return weeks
 
-    def _fill_events(self, days):
+    @property
+    def _events(self):
+        events = getattr(self, '__cached_events', None)
+        if events is not None:
+            return events
+        
         if not hasattr(self, 'context'):
-            return
+            self.__cached_events = []
+            return self.__cached_events
 
         default = self.default_day
         
@@ -294,15 +357,28 @@ class MonthView(object):
         elif default.month == 12:
             end = datetime.datetime(default.year, default.month, 31, 23, 59)
         
-        eventprovider = interfaces.IEventProvider(self.context)
+        provider = interfaces.IEventProvider(self.context)
 
-        for brain in eventprovider.gather_events(start, end):
+        self.__cached_events = provider.gather_events(start, end)
+        return self.__cached_events
+
+    def _fill_events(self, days):
+        for brain in self._events:
             dt = datetime.date(brain.start.year(), 
                                brain.start.month(),
                                brain.start.day())
             day = days[dt]
-            day['events'].append(brain)
-
+            events = day['events']
+            allevents = day['allevents']
+            event_dict = {'label': event_label(brain),
+                          'url': brain.getURL(),
+                          'description': brain.Description}
+            if len(events) < 2:
+                day['events'].append(event_dict)
+            else:
+                day['has_more'] = True
+            allevents.append(event_dict)
+            
     def month(self):
         return MONTHS[self.default_day.month]
     

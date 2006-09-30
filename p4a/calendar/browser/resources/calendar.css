@@ -39,11 +39,10 @@
     white-space: nowrap;
     overflow: hidden;
     margin: 0;
-    margin-bottom: -0.5em;
     padding: 0;
 }
 
-.p4acalendar .event-title {
+.p4acalendar DD {
     color: #777;
     font-size: 0.7em;
 }
@@ -52,6 +51,10 @@
     float: left;
     width: 13%;
     overflow: hidden;
+}
+
+.p4acalendar .day DD.extra-events {
+    border-top: 0.5em solid white;
 }
 
 .p4acalendar .day.today {

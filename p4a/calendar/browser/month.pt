@@ -53,14 +53,17 @@
             tal:attributes="class string:day ${day/extrastyleclass}"
             class="day">
             
-            <dl>
+            <dl tal:define="extra python:len(day['allevents']) - len(day['events'])">
               <dt tal:condition="day/day" tal:content="day/day"></dt>
               <dt tal:condition="not:day/day">&nbsp;</dt>
               <dd tal:repeat="event day/events">
                 <a class="event-title" 
-                   tal:content="event/Title"
-                   tal:attributes="href event/getURL;
-                                   title event/Description"></a>
+                   tal:content="event/label"
+                   tal:attributes="href event/url;
+                                   title event/description"></a>
+              </dd>
+              <dd tal:condition="extra" class="extra-events">
+                +<span tal:replace="extra"></span>
               </dd>
             </dl>
        </div>

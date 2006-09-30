@@ -1,3 +1,4 @@
+import datetime
 from zope import interface
 from zope import component
 
@@ -10,6 +11,9 @@ from Products.ATContentTypes.content import topic
 def dt2DT(dt):
     s = "%04i-%02i-%02i %02i:%02i" % (dt.year, dt.month, dt.day, dt.hour, dt.minute)
     return DateTime(s)
+
+def DT2dt(dt):
+    return datetime.datetime(dt.year(), dt.month(), dt.day(), dt.hour(), dt.minute())
 
 class ATEventProvider(object):
     interface.implements(interfaces.IEventProvider)
