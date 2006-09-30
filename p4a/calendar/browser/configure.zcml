@@ -41,6 +41,7 @@
       permission="zope2.View"
       class=".icalendar.iCalendarView"
       template="icalendar.pt"
+      allowed_interface=".icalendar.IiCalendarView"
       />
 
 </configure>

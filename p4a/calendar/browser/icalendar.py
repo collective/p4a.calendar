@@ -1,11 +1,45 @@
+from zope import interface
 from Products.CMFCore.utils import getToolByName
 from p4a.calendar.interfaces import IEventProvider
 
+class IiCalendarView(interface.Interface):
+    def has_ical_support():
+        """Whether or not the current object has ical support.
+        """
+
+    def exportCalendar(REQUEST=None):
+        """Export the calendar
+        """
+
+    def PUT(REQUEST, RESPONSE):
+        """This is a PUT method for iCalendar access.
+        """
+        
 class iCalendarView(object):
     """ Export the contents of this Calendar as an iCalendar file """
+
+    interface.implements(IiCalendarView)
+
+    def has_ical_support(self):
+        cached = getattr(self, '__cached_ical_support', None)
+        if cached is not None:
+            return cached
         
+        ct = getToolByName(self, 'portal_calendar')
+        try:
+            ct.exportCalendar(events=[])
+            cached = True
+        except TypeError, e:
+            cached = False
+        
+        self.__cached_ical_support = cached
+        return cached
+
     def exportCalendar(self, REQUEST=None):
         """ Export the contents of this Calendar as an iCalendar file """
+        if not self.has_ical_support():
+            return ''
+
         ct = getToolByName(self, 'portal_calendar')
         eventprovider = IEventProvider(self.context)
         events = [x.getObject() for x in eventprovider.all_events()]
