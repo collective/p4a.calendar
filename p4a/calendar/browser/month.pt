@@ -26,7 +26,11 @@
      class="p4acalendar">
 
   <div class="month">
-  
+    <span style="float:right">
+      <a href="icalendar.ics">
+         <img tal:attributes="src string:${portal_url}/icon_export_ical.png"/> Export
+      </a>
+    </span>
     <h1>
       <a href=""
          class="previous"
