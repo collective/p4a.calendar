@@ -4,6 +4,11 @@
     margin-bottom: 1em;
 }
 
+.p4acalendar A {
+    text-decoration: none;
+    border: 0;
+}
+
 .p4acalendar .month H1 A {
     text-decoration: none;
 }
@@ -18,10 +23,43 @@
     color: #ccc;
 }
 
+.p4acalendar .week .day DT A {
+    display: block;
+}
+
 /* for some reason IE doesn't like the separaters here */
 .p4acalendar .standard-week-days .visualClear,
 .p4acalendar .week .visualClear {
     display: none;
+}
+
+.p4acalendar .day-event-popup {
+    background-color: white;
+    position: absolute;
+    border: 1px black solid;
+}
+
+.p4acalendar .day-event-popup UL {
+    list-style: none;
+    margin: 0;
+    padding: 0.3em;
+}
+
+.p4acalendar .day-event-popup LI {
+    border: 1px white solid;
+    margin: 0;
+    padding: 0;
+}
+
+.p4acalendar .day-event-popup LI DL,
+.p4acalendar .day-event-popup LI DT,
+.p4acalendar .day-event-popup LI DD {
+    margin: 0;
+    padding: 0;
+}
+
+.p4acalendar .day-event-popup LI DD {
+    padding-left: 2em;
 }
 
 .p4acalendar .standard-week-days .day {
@@ -55,6 +93,11 @@
 
 .p4acalendar .day DD.extra-events {
     border-top: 0.5em solid white;
+}
+
+.p4acalendar .day DD.extra-events A {
+    display: block;
+    border: 0;
 }
 
 .p4acalendar .day.today {

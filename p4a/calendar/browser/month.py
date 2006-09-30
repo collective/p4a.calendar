@@ -176,6 +176,15 @@ class MonthView(object):
     """View for a month.
     """
 
+    def __init__(self, context=None, request=None):
+        if context is not None:
+            self.context = context
+        if request is not None:
+            self.request = request
+        
+        self.__cached_weeks = {}
+        self.__cached_alldays = {}
+
     @property
     def default_day(self):
         if hasattr(self, '__default_day'):
@@ -288,6 +297,10 @@ class MonthView(object):
         if firstweekday is None:
             firstweekday = self.firstweekday
 
+        weeks = self.__cached_weeks.get((daydate, firstweekday), None)
+        if weeks is not None:
+            return weeks
+
         weektuples = list(monthweeks(daydate=daydate, firstweekday=firstweekday))
         weeks = []
         alldays = {}
@@ -312,6 +325,9 @@ class MonthView(object):
                 
                 day['extrastyleclass'] = ''
                 day['day'] = weekdate.day
+                day['datestr'] = '%04i-%02i-%02i' % (weekdate.year,
+                                                     weekdate.month,
+                                                     weekdate.day)
                 
                 if weekdate == today:
                     day['extrastyleclass'] += ' today'
@@ -335,7 +351,23 @@ class MonthView(object):
         
         self._fill_events(alldays)
         
+        self.__cached_weeks[(daydate, firstweekday)] = weeks
+        self.__cached_alldays[(daydate, firstweekday)] = alldays
+
         return weeks
+
+    def alldays(self, daydate=None, firstweekday=None):
+        if daydate is None:
+            daydate = self.default_day
+
+        today = datetime.datetime.today().date()
+        
+        if firstweekday is None:
+            firstweekday = self.firstweekday
+
+        # kick the day generation
+        self.weeks(daydate, firstweekday)
+        return self.__cached_alldays[(daydate, firstweekday)].values()
 
     @property
     def _events(self):

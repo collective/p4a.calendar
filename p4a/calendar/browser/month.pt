@@ -14,6 +14,12 @@
           "string: @import url(${context/++resource++p4acalendar/calendar.css});">
   </style>
   <script type="text/javascript" src="calendar.js"
+          tal:attributes="src string:${context/++resource++p4acalendar/anchor-position.js}">
+  </script>
+  <script type="text/javascript" src="calendar.js"
+          tal:attributes="src string:${context/++resource++p4acalendar/popup-window.js}">
+  </script>
+  <script type="text/javascript" src="calendar.js"
           tal:attributes="src string:${context/++resource++p4acalendar/calendar.js}">
   </script>
   </metal:block>
@@ -24,6 +30,29 @@
 
 <div metal:fill-slot="main"
      class="p4acalendar">
+
+            
+  <tal:block tal:repeat="day view/alldays">
+     <div id=""
+          style="visibility:hidden"
+          class="day-event-popup"
+          tal:condition="day/allevents"
+          tal:attributes="id string:p4acalendar-allevents-${day/datestr}">
+
+       <ul>
+         <li tal:repeat="event day/events">
+           <dl>
+             <dt>
+               <a href=""
+                  tal:content="event/label"
+                  tal:attributes="href event/url"></a>
+             </dt>
+             <dd tal:content="event/description">
+             </dd>
+         </li>
+       </ul>
+     </div>
+  </tal:block>
 
   <div class="month">
     <span style="float:right">
@@ -54,11 +83,19 @@
          tal:attributes="class string:week ${week/extrastyleclass}">
          
        <div tal:repeat="day week/days"
-            tal:attributes="class string:day ${day/extrastyleclass}"
-            class="day">
+            tal:attributes="class string:day ${day/extrastyleclass};
+                            id string:p4acalendar-day-${day/datestr}"
+            class="day"
+            id="">
             
-            <dl tal:define="extra python:len(day['allevents']) - len(day['events'])">
-              <dt tal:condition="day/day" tal:content="day/day"></dt>
+            <tal:block tal:define="extra python:len(day['allevents']) - len(day['events'])">
+            
+            <dl>
+              <dt tal:condition="day/day">
+                <a href=""
+                   tal:content="day/day"
+                   tal:attributes="onclick string:events_popup('${day/datestr}');;return false;;"></a>
+              </dt>
               <dt tal:condition="not:day/day">&nbsp;</dt>
               <dd tal:repeat="event day/events">
                 <a class="event-title" 
@@ -67,9 +104,14 @@
                                    title event/description"></a>
               </dd>
               <dd tal:condition="extra" class="extra-events">
-                +<span tal:replace="extra"></span>
+                <a href=""
+                   tal:attributes="onclick string:events_popup('${day/datestr}');;return false;;">
+                  +<span tal:replace="extra"></span>
+                </a>
               </dd>
             </dl>
+
+            </tal:block>
        </div>
        <div class="visualClear"></div>
     </div>
