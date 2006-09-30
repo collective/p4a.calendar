@@ -27,6 +27,14 @@ class ATEventProvider(object):
                                end={'query': dt2DT(stop), 'range': 'max'})
 
         return event_brains
+    
+    def all_events(self):
+        catalog = cmfutils.getToolByName(self.context, 'portal_catalog')
+        path = '/'.join(self.context.getPhysicalPath())
+        event_brains = catalog(portal_type='Event',
+                               path=path)
+        return event_brains
+        
 
 class TopicEventProvider(object):
     interface.implements(interfaces.IEventProvider)
@@ -45,3 +53,7 @@ class TopicEventProvider(object):
         query = self.context.buildQuery()
         return (x for x in self.context.queryCatalog() 
                 if self.acceptable_event(x, start, stop))
+
+    def all_events(self):
+        query = self.context.buildQuery()
+        return self.context.queryCatalog() 

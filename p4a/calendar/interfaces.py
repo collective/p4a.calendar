@@ -29,3 +29,7 @@ class IEventProvider(interface.Interface):
         *start* and *stop* arguments are expected to be python datetime
         objects.
         """
+
+    def all_events():
+        """Return all events. Used for exports and such.
+        """

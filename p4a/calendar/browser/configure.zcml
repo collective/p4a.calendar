@@ -35,4 +35,12 @@
       template="month.pt"
       />
 
+  <page
+      name="icalendar.ics"
+      for="p4a.calendar.interfaces.ICalendarEnhanced"
+      permission="zope2.View"
+      class=".icalendar.iCalendarView"
+      template="icalendar.pt"
+      />
+
 </configure>
