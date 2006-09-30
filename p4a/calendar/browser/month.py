@@ -69,7 +69,14 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     
       >>> weeks[-1][-1]
       datetime.date(2006, 3, 4)
-      
+
+    For a month where the last day of the month is the last day of the
+    week.
+    
+      >>> weeks = weeks = list(monthweeks(2006, 9, firstweekday=6))
+      >>> weeks[-1][-1]
+      datetime.date(2006, 9, 30)
+
     """
     
     if firstweekday == None:
@@ -99,19 +106,20 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     done = False
     weeks = []
     day = firstcalday
+    nextday = day + ONEDAY
     weekday = calendar.weekday(day.year, day.month, day.day)
-    while 1:
+
+    while day.month <= firstdate.month or \
+          (day.month > firstdate.month and weekday != firstweekday):
+
         if weekday == firstweekday:
             week = []
             weeks.append(week)
         week.append(day)
         
         day += ONEDAY
+        nextday = day + ONEDAY
         weekday = calendar.weekday(day.year, day.month, day.day)
-
-        if (day.year > firstdate.year or day.month > firstdate.month) and weekday == lastweekday:
-            week.append(day)
-            break
 
     return (tuple(x) for x in weeks)
 
@@ -144,7 +152,8 @@ class MonthView(object):
 
     @property
     def firstweekday(self):
-        return calendar.firstweekday()
+        return int(self.request.form.get('firstweekday', 
+                                         calendar.firstweekday()))
 
     def standard_week_days(self, firstweekday=None):
         """Return the standard days of the week starting with the day
@@ -174,7 +183,7 @@ class MonthView(object):
         
         return days
 
-    def weeks(self, daydate=None):
+    def weeks(self, daydate=None, firstweekday=None):
         """Return as a list of of the (partial or full) weeks of the
         month which contains the datetime instance, *day*.  Each item
         in this list is a dict containing a key representing the day
@@ -185,20 +194,20 @@ class MonthView(object):
         date.
         
           >>> mt = MonthView()
-          >>> len(mt.weeks()) > 1
+          >>> len(mt.weeks(firstweekday=6)) > 1
           True
 
         Now lets query known dates.
         
           >>> from datetime import datetime
-          >>> weeks = mt.weeks(datetime(2006, 2, 23))
+          >>> weeks = mt.weeks(datetime(2006, 2, 23), 0)
           >>> len(weeks)
           5
           
         First day of the week period should be an outside month day.
         
           >>> weeks[0]['days'][0]
-          {'extrastyleclass': ' outside-month first-week-day', 'events': [], 'day': None}
+          {'extrastyleclass': ' outside-month first-week-day', 'events': [], 'day': 30}
 
           >>> weeks[4]['days'][0]
           {'extrastyleclass': ' first-week-day', 'events': [], 'day': 27}
@@ -206,7 +215,13 @@ class MonthView(object):
         Inspect the last day.  Should be outside the month as well.
         
           >>> weeks[-1]['days'][-1]
-          {'extrastyleclass': ' outside-month last-week-day', 'events': [], 'day': None}
+          {'extrastyleclass': ' outside-month last-week-day last-month-day', 'events': [], 'day': 5}
+          
+        Make sure if we use a different weekday things still work.
+        
+          >>> weeks = mt.weeks(datetime(2006, 2, 23), 0)
+          >>> weeks[0]['days'][0]
+          {'extrastyleclass': ' outside-month first-week-day', 'events': [], 'day': 30}
           
         """
 
@@ -215,7 +230,10 @@ class MonthView(object):
 
         today = datetime.datetime.today().date()
         
-        weektuples = list(calendar.monthcalendar(daydate.year, daydate.month))
+        if firstweekday is None:
+            firstweekday = self.firstweekday
+
+        weektuples = list(monthweeks(daydate=daydate, firstweekday=firstweekday))
         weeks = []
         alldays = {}
         for weekpos, weektuple in enumerate(weektuples):
@@ -229,23 +247,19 @@ class MonthView(object):
             elif weekpos == len(weektuples)-1:
                 week['extrastyleclass'] += ' last-week'
 
-            for daypos, weekday in enumerate(weektuple):
+            for daypos, weekdate in enumerate(weektuple):
                 day = {'events': []}
                 week['days'].append(day)
                 
-                if weekday:
-                    alldays[datetime.date(daydate.year, daydate.month, weekday)] = day
+                alldays[weekdate] = day
                 
                 day['extrastyleclass'] = ''
+                day['day'] = weekdate.day
                 
-                if weekday and \
-                        datetime.date(daydate.year, daydate.month, weekday) == today:
+                if weekdate == today:
                     day['extrastyleclass'] += ' today'
 
-                if weekday:
-                    day['day'] = weekday
-                else:
-                    day['day'] = None
+                if weekdate.month != daydate.month:
                     day['extrastyleclass'] += ' outside-month'
                     
                 if daypos == 0:
@@ -253,7 +267,7 @@ class MonthView(object):
                 elif daypos == 6:
                     day['extrastyleclass'] += ' last-week-day'
                     
-                if weekday == 1:
+                if weekdate.month == daydate.month and weekdate.day == 1:
                     day['extrastyleclass'] += ' first-month-day'
 
         # find the last day of the month and give it extra style class
