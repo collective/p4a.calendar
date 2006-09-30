@@ -1,7 +1,6 @@
 import datetime
 import calendar
 from p4a.calendar import interfaces
-from p4a.calendar.atct import eventprovider
 
 DAYS = [
         'Monday', 
@@ -384,25 +383,37 @@ class MonthView(object):
         return self.__cached_events
 
     def _fill_events(self, days):
-        for brain in self._events:
-            dt = datetime.date(brain.start.year(), 
-                               brain.start.month(),
-                               brain.start.day())
+        for event in self._events:
+            dt = datetime.date(event.start.year, 
+                               event.start.month,
+                               event.start.day)
             day = days[dt]
             events = day['events']
             allevents = day['allevents']
-            start = eventprovider.DT2dt(brain.start)
-            timespan = '%i:%02i%s to %i:%02i%s' % (brain.start.h_12(),
-                                                   brain.start.minute(),
-                                                   brain.start.ampm(),
-                                                   brain.end.h_12(),
-                                                   brain.end.minute(),
-                                                   brain.end.ampm())
-            event_dict = {'label': tiny_time(start) + ' ' + brain.Title,
+
+            starthour = event.start.hour
+            startampm = 'am'
+            if starthour > 12:
+                starthour -= 12
+                startampm = 'pm'
+
+            endhour = event.end.hour
+            endampm = 'am'
+            if endhour > 12:
+                endhour -= 12
+                endampm = 'pm'
+
+            timespan = '%i:%02i%s to %i:%02i%s' % (starthour,
+                                                   event.start.minute,
+                                                   startampm,
+                                                   endhour,
+                                                   event.end.minute,
+                                                   endampm)
+            event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
                           'timespan': timespan,
-                          'url': brain.getURL(),
-                          'title': brain.Title,
-                          'description': brain.Description}
+                          'local_url': event.local_url,
+                          'title': event.title,
+                          'description': event.description}
             if len(events) < 2:
                 day['events'].append(event_dict)
             else:

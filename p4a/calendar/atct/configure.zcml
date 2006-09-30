@@ -32,7 +32,7 @@
 
   <adapter factory=".eventprovider.ATEventProvider" />
   <adapter factory=".eventprovider.TopicEventProvider" />
-
+  <adapter factory=".eventprovider.BrainEvent" />
 
   <configure package="p4a.calendar.browser">
     <browser:page

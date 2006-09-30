@@ -45,7 +45,7 @@
              <dt>
                <a href=""
                   tal:content="event/title"
-                  tal:attributes="href event/url"></a>
+                  tal:attributes="href event/local_url"></a>
              </dt>
              <dd tal:content="event/timespan"></dd>
              <dd tal:content="event/description"></dd>
@@ -101,7 +101,7 @@
               <dd tal:repeat="event day/events">
                 <a class="event-title" 
                    tal:content="event/label"
-                   tal:attributes="href event/url;
+                   tal:attributes="href event/local_url;
                                    title event/description"></a>
               </dd>
               <dd tal:condition="extra" class="extra-events">

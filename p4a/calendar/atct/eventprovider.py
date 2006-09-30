@@ -2,6 +2,7 @@ import datetime
 from zope import interface
 from zope import component
 
+from Products.ZCatalog import CatalogBrains
 from p4a.calendar import interfaces
 from DateTime import DateTime
 from Products.CMFCore import utils as cmfutils
@@ -30,7 +31,7 @@ class ATEventProvider(object):
                                start={'query': dt2DT(start), 'range': 'min'},
                                end={'query': dt2DT(stop), 'range': 'max'})
 
-        return event_brains
+        return (interfaces.IEvent(x) for x in event_brains)
     
     def all_events(self):
         catalog = cmfutils.getToolByName(self.context, 'portal_catalog')
@@ -55,9 +56,36 @@ class TopicEventProvider(object):
     
     def gather_events(self, start, stop):
         query = self.context.buildQuery()
-        return (x for x in self.context.queryCatalog() 
+        return (interfaces.IEvent(x) for x in self.context.queryCatalog() 
                 if self.acceptable_event(x, start, stop))
 
     def all_events(self):
         query = self.context.buildQuery()
         return self.context.queryCatalog() 
+
+class BrainEvent(object):
+    interface.implements(interfaces.IEvent)
+    component.adapts(CatalogBrains.AbstractCatalogBrain)
+
+    def __init__(self, context):
+        self.context = context
+    
+    @property
+    def title(self):
+        return self.context.Title
+
+    @property
+    def description(self):
+        return self.context.Description
+    
+    @property
+    def start(self):
+        return DT2dt(self.context.start)
+
+    @property
+    def end(self):
+        return DT2dt(self.context.end)
+
+    @property
+    def local_url(self):
+        return self.context.absolute_url()
