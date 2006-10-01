@@ -1,6 +1,37 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+
+  <permission
+      id="zope.ManageContent"
+      title="Manage content"
+      />
+
+  <permission
+      id="zope.View"
+      title="View content"
+      />
+
+  <permission
+      id="p4a.calendar.ModifyContent"
+      title="Modify content"
+      />
+
+  <permission
+      id="p4a.calendar.ViewContent"
+      title="View content"
+      />
+
+  <meta:redefinePermission 
+      from="p4a.calendar.ModifyContent"
+      to="zope.ManageContent" 
+      />
     
+  <meta:redefinePermission 
+      from="p4a.calendar.ViewContent"
+      to="zope.View" 
+      />
+
   <include package=".browser" />
 
 </configure>

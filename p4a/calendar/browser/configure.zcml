@@ -4,44 +4,22 @@
   <resourceDirectory
       name="p4acalendar"
       directory="resources"
-      permission="zope2.View"
-      />
-
-  <menu
-      id="object_buttons"
-      title="Plone Content Drop-Down Menu"
-      />
-      
-  <menuItem
-      menu="object_buttons"
-      for="p4a.calendar.interfaces.IPossibleCalendar"
-      title="Activate / Configure Calendar"
-      action="${object_url}/calendar-config.html"
-      permission="cmf.ModifyPortalContent"
+      permission="p4a.calendar.ViewContent"
       />
 
   <page
       name="calendar-config.html"
       for="p4a.calendar.interfaces.IPossibleCalendar"
-      permission="cmf.ModifyPortalContent"
+      permission="p4a.calendar.ModifyContent"
       class=".config.ConfigView"
       />
 
   <page
       name="month.html"
       for="p4a.calendar.interfaces.ICalendarEnhanced"
-      permission="zope2.View"
+      permission="p4a.calendar.ViewContent"
       class=".month.MonthView"
       template="month.pt"
-      />
-
-  <page
-      name="icalendar.ics"
-      for="p4a.calendar.interfaces.ICalendarEnhanced"
-      permission="zope2.View"
-      class=".icalendar.iCalendarView"
-      template="icalendar.pt"
-      allowed_interface=".icalendar.IiCalendarView"
       />
 
 </configure>
