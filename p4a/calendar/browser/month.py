@@ -170,17 +170,18 @@ class MonthView(object):
         if request is not None:
             self.request = request
         
-        self.__cached_weeks = {}
-        self.__cached_alldays = {}
+        self._cached_weeks = {}
+        self._cached_alldays = {}
 
-    @property
-    def default_day(self):
-        if hasattr(self, '__default_day'):
-            return self.__default_day
+    def __set_default_day(self, defaultday):
+        self._default_day = defaultday    
+    def __get_default_day(self):
+        if hasattr(self, '_default_day'):
+            return self._default_day
         
         if not hasattr(self, 'request'):
-            self.__default_day = datetime.datetime.today()
-            return self.__default_day
+            self._default_day = datetime.datetime.today()
+            return self._default_day
         
         year = self.request.form.get('year', None)
         month = self.request.form.get('month', None)
@@ -192,14 +193,24 @@ class MonthView(object):
         year = int(year)
         month = int(month)
         
-        self.__default_day = datetime.datetime(year, month, 1)
+        self._default_day = datetime.datetime(year, month, 1)
         
-        return self.__default_day
+        return self._default_day
+    
+    default_day = property(__get_default_day, __set_default_day)
 
-    @property
-    def firstweekday(self):
-        return int(self.request.form.get('firstweekday', 
-                                         calendar.firstweekday()))
+    def __set_firstweekday(self, firstweekday):
+        self._firstweekday = firstweekday
+    def __get_firstweekday(self):
+        first = getattr(self, '_firstweekday', None)
+        if first is not None:
+            return first
+        first = int(self.request.form.get('firstweekday', 
+                                          calendar.firstweekday()))
+        self._firstweekday = first
+        return first
+    
+    firstweekday = property(__get_firstweekday, __set_firstweekday)
 
     def standard_week_days(self, firstweekday=None):
         """Return the standard days of the week starting with the day
@@ -285,7 +296,7 @@ class MonthView(object):
         if firstweekday is None:
             firstweekday = self.firstweekday
 
-        weeks = self.__cached_weeks.get((daydate, firstweekday), None)
+        weeks = self._cached_weeks.get((daydate, firstweekday), None)
         if weeks is not None:
             return weeks
 
@@ -339,8 +350,8 @@ class MonthView(object):
         
         self._fill_events(alldays)
         
-        self.__cached_weeks[(daydate, firstweekday)] = weeks
-        self.__cached_alldays[(daydate, firstweekday)] = alldays
+        self._cached_weeks[(daydate, firstweekday)] = weeks
+        self._cached_alldays[(daydate, firstweekday)] = alldays
 
         return weeks
 
@@ -355,17 +366,17 @@ class MonthView(object):
 
         # kick the day generation
         self.weeks(daydate, firstweekday)
-        return self.__cached_alldays[(daydate, firstweekday)].values()
+        return self._cached_alldays[(daydate, firstweekday)].values()
 
     @property
     def _events(self):
-        events = getattr(self, '__cached_events', None)
+        events = getattr(self, '_cached_events', None)
         if events is not None:
             return events
         
         if not hasattr(self, 'context'):
-            self.__cached_events = []
-            return self.__cached_events
+            self._cached_events = []
+            return self._cached_events
 
         default = self.default_day
         
@@ -379,8 +390,8 @@ class MonthView(object):
         
         provider = interfaces.IEventProvider(self.context)
 
-        self.__cached_events = provider.gather_events(start, end)
-        return self.__cached_events
+        self._cached_events = provider.gather_events(start, end)
+        return self._cached_events
 
     def _fill_events(self, days):
         for event in self._events:
