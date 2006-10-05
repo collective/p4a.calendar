@@ -115,6 +115,10 @@
 }
 
 
+.p4acalendar .event-title {
+    font-size: 1em;
+}
+
 /* grid start */
 /*
 The purpose here of a fancy grid is to make sure days that are not
