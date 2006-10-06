@@ -187,7 +187,7 @@ class MonthView(object):
         month = self.request.form.get('month', None)
         
         if month is None:
-            return datetime.datetime.today()
+            return datetime.datetime.today().date()
         
         year = year or datetime.datetime.today().year
         year = int(year)
@@ -358,8 +358,6 @@ class MonthView(object):
     def alldays(self, daydate=None, firstweekday=None):
         if daydate is None:
             daydate = self.default_day
-
-        today = datetime.datetime.today().date()
         
         if firstweekday is None:
             firstweekday = self.firstweekday
