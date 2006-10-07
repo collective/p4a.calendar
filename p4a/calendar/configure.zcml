@@ -9,7 +9,7 @@
 
   <permission
       id="zope.View"
-      title="View content"
+      title="View"
       />
 
   <permission
@@ -19,7 +19,7 @@
 
   <permission
       id="p4a.calendar.ViewContent"
-      title="View content"
+      title="View"
       />
 
   <meta:redefinePermission 
