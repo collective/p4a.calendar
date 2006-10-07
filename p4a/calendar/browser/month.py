@@ -417,12 +417,14 @@ class MonthView(object):
                                                    startampm,
                                                    endhour,
                                                    event.end.minute,
-                                                   endampm)
+                                                   endampm)            
+            
             event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
                           'timespan': timespan,
                           'local_url': event.local_url,
                           'title': event.title,
-                          'description': event.description}
+                          'description': event.description,
+                          'type': event.type}
             if len(events) < 2:
                 day['events'].append(event_dict)
             else:

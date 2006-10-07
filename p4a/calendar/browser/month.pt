@@ -98,12 +98,14 @@
                    tal:attributes="onclick string:events_popup('${day/datestr}');;return false;;"></a>
               </dt>
               <dt tal:condition="not:day/day">&nbsp;</dt>
-              <dd tal:repeat="event day/events">
-                <a class="event-title" 
-                   tal:content="event/label"
-                   tal:attributes="href event/local_url;
-                                   title event/description"></a>
-              </dd>
+              <tal:block repeat="event day/events">
+                <dd tal:attributes="class event/type">
+                  <a class="event-title" 
+                     tal:content="event/label"
+                     tal:attributes="href event/local_url;
+                                     title event/description"></a>
+                </dd>
+              </tal:block>
               <dd tal:condition="extra" class="extra-events">
                 <a href=""
                    tal:attributes="onclick string:events_popup('${day/datestr}');;return false;;">

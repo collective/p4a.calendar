@@ -53,3 +53,6 @@ class IEvent(interface.Interface):
     local_url = schema.TextLine(title=u'URL',
                                 required=True,
                                 readonly=True)
+    type = schema.TextLine(title=u'Type',
+                           required=True,
+                           readonly=False)

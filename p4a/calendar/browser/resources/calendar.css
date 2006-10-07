@@ -156,4 +156,47 @@ make it obvious.
     border-right: 1px #ccc solid;
 }
 
+/* Event types */
+
+.p4acalendar .appointment {
+    background: #cde2a7;
+}
+
+.p4acalendar .convention {
+    background: #f4f4be;
+}
+
+.p4acalendar .meeting {
+    background: #cde2a7;
+}
+
+.p4acalendar .socialevent {
+    background: #dee7ec;
+}
+
+.p4acalendar .work {
+    background: #CCC;
+}
+
+.p4acalendar .meetingcall {
+    background: #dee7ec;
+}
+
+.p4acalendar .pressevent {
+    background: #cde2a7;
+}
+
+.p4acalendar .legactivity {
+    background: #f0bbff;
+}
+
+.p4acalendar .fieldevent {
+    background: #ffce7b;
+}
+
+.p4acalendar .deadline {
+    background: #F77;
+}
+
+
 /* end grid */
