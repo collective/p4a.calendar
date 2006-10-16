@@ -24,10 +24,11 @@ class IEventProvider(interface.Interface):
     """Provides events.
     """
     
-    def gather_events(start, stop):
+    def gather_events(start=None, stop=None, **kw):
         """Return all appropriate events for the given time interval.  The
         *start* and *stop* arguments are expected to be python datetime
-        objects.
+        objects or None.
+        **kw is used as filtering arguments.
         """
 
     def all_events():
