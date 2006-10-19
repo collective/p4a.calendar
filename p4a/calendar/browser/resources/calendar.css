@@ -200,3 +200,22 @@ make it obvious.
 
 
 /* end grid */
+
+/* eventlist */
+
+.p4acalendar .eventlist H1 {
+}
+
+.p4acalendar .eventlist .event_details {
+    float: left;
+    width: 100px;
+}
+
+.p4acalendar .eventlist .event_body {
+}
+
+.p4acalendar .eventlist A {
+    font-weight: bold;
+}
+
+/* end eventlist */

@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+  <metal:block metal:fill-slot="head_slot">
+  <style type="text/css" 
+         media="all"
+         tal:content=
+          "string: @import url(${context/++resource++p4acalendar/calendar.css});">
+  </style>
+  <script type="text/javascript" src="calendar.js"
+          tal:attributes="src string:${context/++resource++p4acalendar/anchor-position.js}">
+  </script>
+  <script type="text/javascript" src="calendar.js"
+          tal:attributes="src string:${context/++resource++p4acalendar/popup-window.js}">
+  </script>
+  <script type="text/javascript" src="calendar.js"
+          tal:attributes="src string:${context/++resource++p4acalendar/calendar.js}">
+  </script>
+  </metal:block>
+  
+</head>
+
+<body>
+
+<div metal:fill-slot="main"
+     class="p4acalendar">
+
+   <div class="eventlist">
+     <div tal:repeat="month options/months">
+       <h1>
+         <tal:block content="month/month_name" i18n:translate=""/>
+         <tal:block content="month/year"/>
+       </h1>
+       <div class="event" tal:repeat="event month/events">
+         <div class="event_details">
+           <tal:block content="month/month_name" i18n:translate=""/>
+           <tal:block content="event/day"/>
+         </div>
+         <div class="event_body">
+           <a class="event_title" tal:content="event/title"
+              tal:attributes="href event/url" /><br/>
+           <tal:block content="event/description"/>
+         </div>
+       </div>
+     </div>
+   </div>
+
+</div> <!-- end main fill slot -->
+
+</body>
+</html>

@@ -22,4 +22,20 @@
       template="month.pt"
       />
 
+  <page
+      name="events.html"
+      for="p4a.calendar.interfaces.ICalendarEnhanced"
+      permission="p4a.calendar.ViewContent"
+      class=".events.EventListingView"
+      attribute="upcomingEvents"
+      />
+
+  <page
+      name="past_events.html"
+      for="p4a.calendar.interfaces.ICalendarEnhanced"
+      permission="p4a.calendar.ViewContent"
+      class=".events.EventListingView"
+      attribute="pastEvents"
+      />
+
 </configure>
