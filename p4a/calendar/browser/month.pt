@@ -30,7 +30,6 @@
 
 <div metal:fill-slot="main"
      class="p4acalendar">
-
             
   <tal:block tal:repeat="day view/alldays">
      <div id=""
@@ -70,7 +69,9 @@
          class="next"
          tal:attributes="href view/next_month_link">&rarr;</a>
     </h1>
-  
+
+    <tal:block replace="structure view/renderFilter"/>
+
     <div class="standard-week-days">
       <tal:block tal:repeat="day view/standard_week_days">
       <div tal:attributes="class string:day ${day/extrastyleclass}"

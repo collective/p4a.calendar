@@ -1,5 +1,7 @@
 import datetime
 import calendar
+from zope.component import queryMultiAdapter
+from zope.contentprovider.interfaces import IContentProvider
 from p4a.calendar import interfaces
 
 DAYS = [
@@ -388,7 +390,8 @@ class MonthView(object):
         
         provider = interfaces.IEventProvider(self.context)
 
-        self._cached_events = provider.gather_events(start, end)
+        self._cached_events = provider.gather_events(start, end, 
+                                                     **self.request.form)
         return self._cached_events
 
     def _fill_events(self, days):
@@ -469,3 +472,12 @@ class MonthView(object):
         return '%s?year=%s&month=%s' % (self.context.absolute_url(),
                                         year,
                                         month)
+
+    def renderFilter(self):
+        provider = queryMultiAdapter(
+            (self.context, self.request, self), 
+            IContentProvider, 'eventfilter')
+        if provider is None:
+            return ''
+        provider.update()
+        return provider.render()
