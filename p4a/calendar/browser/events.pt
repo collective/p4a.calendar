@@ -31,6 +31,15 @@
 <div metal:fill-slot="main"
      class="p4acalendar">
 
+    <tal:block define="link view/event_creation_link" condition="python:link">
+       <a tal:attributes="href link">Create event</a> | </tal:block>
+    View: <a class="view_link" href="month.html">Month</a> |
+    <a class="view_link" href="events.html" tal:condition="options/show_past">
+      Event list</a>
+    <a class="view_link" href="past_events.html" 
+      tal:condition="not:options/show_past">
+      Past events list</a>
+
    <div class="eventlist">
      <div tal:repeat="month options/months">
        <h1>
@@ -47,6 +56,7 @@
               tal:attributes="href event/url" /><br/>
            <tal:block content="event/description"/>
          </div>
+         <div style="clear: both;"> </div>
        </div>
      </div>
    </div>

@@ -473,7 +473,7 @@ class MonthView(object):
                                         year,
                                         month)
 
-    def renderFilter(self):
+    def render_filter(self):
         provider = queryMultiAdapter(
             (self.context, self.request, self), 
             IContentProvider, 'eventfilter')
@@ -481,3 +481,8 @@ class MonthView(object):
             return ''
         provider.update()
         return provider.render()
+
+    def event_creation_link(self, start=None, stop=None):
+        provider = interfaces.IEventProvider(self.context)
+        return provider.event_creation_link(start, stop)
+    

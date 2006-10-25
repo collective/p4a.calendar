@@ -50,9 +50,13 @@ class EventListingView(object):
     def upcomingEvents(self):
         now = datetime.datetime.now()
         months = self._getEventList(start=now)
-        return self.eventlist(months=months)
+        return self.eventlist(months=months, show_past=False)
 
     def pastEvents(self):
         now = datetime.datetime.now()
         months = self._getEventList(stop=now)
-        return self.eventlist(months=months)
+        return self.eventlist(months=months, show_past=True)
+
+    def event_creation_link(self, start=None, stop=None):
+        provider = interfaces.IEventProvider(self.context)
+        return provider.event_creation_link(start, stop)

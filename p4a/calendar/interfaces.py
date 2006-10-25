@@ -34,6 +34,13 @@ class IEventProvider(interface.Interface):
     def all_events():
         """Return all events. Used for exports and such.
         """
+        
+    def event_creation_link(start=None, stop=None):
+        """Returns a url to a page that can create an event.
+        
+        Optional start and stop times to pre-fill start and end of event.
+        """
+        
 
 class IEvent(interface.Interface):
     """An event.

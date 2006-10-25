@@ -70,8 +70,12 @@
          tal:attributes="href view/next_month_link">&rarr;</a>
     </h1>
 
-    <tal:block replace="structure view/renderFilter"/>
-
+    <tal:block replace="structure view/render_filter"/>
+    <tal:block define="link view/event_creation_link" condition="python:link">
+       <a tal:attributes="href link">Create event</a> | </tal:block>
+    View: <a class="view_link" href="events.html">Event list</a> |
+    <a class="view_link" href="past_events.html">Past events list</a>
+    
     <div class="standard-week-days">
       <tal:block tal:repeat="day view/standard_week_days">
       <div tal:attributes="class string:day ${day/extrastyleclass}"

@@ -214,6 +214,7 @@ make it obvious.
 }
 
 .p4acalendar .eventlist .event_body {
+    float: left;
 }
 
 .p4acalendar .eventlist A {
