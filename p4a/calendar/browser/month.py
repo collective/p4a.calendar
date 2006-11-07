@@ -71,7 +71,7 @@ def tiny_time(dt):
 
 def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     """Return an iterable of week tuples where each element in the week
-    tuple is an instance of *datetime.date*.  If *datedate* is ommitted
+    tuple is an instance of *datetime.date*.  If *daydate* is ommitted
     then the date chosen is based on the *year* and *month*.
     
     The following are equivalent.
@@ -112,9 +112,19 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     For a month where the last day of the month is the last day of the
     week.
     
-      >>> weeks = weeks = list(monthweeks(2006, 9, firstweekday=6))
+      >>> weeks = list(monthweeks(2006, 9, firstweekday=6))
       >>> weeks[-1][-1]
       datetime.date(2006, 9, 30)
+
+    At one point when you used the last month while retrieving the weeks
+    it would send the mechanism into an infinite loop until it raised 
+    OverflowError.  Lets make sure that doesn't happen again.
+
+      >>> weeks = list(monthweeks(daydate=date(2006, 12, 1)))
+      >>> weeks[0][0]
+      datetime.date(2006, 11, 27)
+      >>> weeks[-1][-1]
+      datetime.date(2006, 12, 31)
 
     """
     
@@ -148,7 +158,7 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     nextday = day + ONEDAY
     weekday = calendar.weekday(day.year, day.month, day.day)
 
-    while day.month <= firstdate.month or \
+    while (day.month <= firstdate.month and day.year <= firstdate.year) or \
           (day.month > firstdate.month and weekday != firstweekday):
 
         if weekday == firstweekday:
