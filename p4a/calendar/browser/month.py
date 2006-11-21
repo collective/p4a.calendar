@@ -32,6 +32,37 @@ MONTHS = [
 
 ONEDAY = datetime.timedelta(days=1)
 
+def derive_ampmtime(timeobj):
+    """Derives the 12 hour clock am/pm identifier and proper hour.
+    
+    Some random tests.
+    
+      >>> from datetime import time
+      
+      >>> derive_ampmtime(time(1, 30))
+      (1, 'a')
+      
+      >>> derive_ampmtime(time(13, 30))
+      (1, 'p')
+      
+      >>> derive_ampmtime(time(12, 01))
+      (12, 'p')
+
+      >>> derive_ampmtime(time(23, 59))
+      (11, 'p')
+
+    """
+    
+    hour = timeobj.hour
+    ampm = 'a'
+    if hour == 12:
+        ampm = 'p'
+    elif hour > 12:
+        hour -= 12
+        ampm = 'p'
+
+    return (hour, ampm)
+
 def tiny_time(dt):
     """Return a clean label representing the given event.
     
@@ -54,13 +85,9 @@ def tiny_time(dt):
       '1:20p'
     """
     
-    ampm = ''
-    hour = ''
-    if dt.hour > 12:
-        hour = dt.hour - 12
-        ampm = 'p'
-    else:
-        hour = dt.hour
+    hour, ampm = derive_ampmtime(dt)
+    if ampm == 'a':
+        ampm = ''
     minutes = ''
     if dt.minute != 0:
         minutes = ':%02i' % dt.minute
@@ -440,24 +467,15 @@ class MonthView(object):
             events = day['events']
             allevents = day['allevents']
 
-            starthour = event.start.hour
-            startampm = 'am'
-            if starthour > 12:
-                starthour -= 12
-                startampm = 'pm'
+            starthour, startampm = derive_ampmtime(event.start)
+            endhour, endampm = derive_ampmtime(event.end)
 
-            endhour = event.end.hour
-            endampm = 'am'
-            if endhour > 12:
-                endhour -= 12
-                endampm = 'pm'
-
-            timespan = '%i:%02i%s to %i:%02i%s' % (starthour,
-                                                   event.start.minute,
-                                                   startampm,
-                                                   endhour,
-                                                   event.end.minute,
-                                                   endampm)            
+            timespan = '%i:%02i%sm to %i:%02i%sm' % (starthour,
+                                                     event.start.minute,
+                                                     startampm,
+                                                     endhour,
+                                                     event.end.minute,
+                                                     endampm)            
             
             event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
                           'timespan': timespan,
