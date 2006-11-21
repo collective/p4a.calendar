@@ -39,7 +39,7 @@
           tal:attributes="id string:p4acalendar-allevents-${day/datestr}">
 
        <ul>
-         <li tal:repeat="event day/events">
+         <li tal:repeat="event day/allevents">
            <dl>
              <dt>
                <a href=""
