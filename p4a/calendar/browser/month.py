@@ -77,20 +77,17 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     The following are equivalent.
     
       >>> from datetime import date
-      >>> list(monthweeks(2006, 2)) == list(monthweeks(daydate=date(2006, 2, 13)))
+      >>> import calendar
+      
+    Using a daydate means the actual day gets ignored.
+
+      >>> list(monthweeks(2006, 2)) == \\
+      ...     list(monthweeks(daydate=date(2006, 2, 13)))
       True
       
     Now lets check out some week day values.
     
-      >>> weeks = list(monthweeks(2006, 2, firstweekday=6))
-      
-    There will of course be 5 weeks.
-    
-      >>> len(weeks)
-      5
-
-    The first day of the first week will be January 1st, 2006.
-      
+      >>> weeks = list(monthweeks(2006, 2, firstweekday=calendar.SUNDAY))
       >>> weeks[0][0]
       datetime.date(2006, 1, 29)
       
@@ -112,7 +109,7 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     For a month where the last day of the month is the last day of the
     week.
     
-      >>> weeks = list(monthweeks(2006, 9, firstweekday=6))
+      >>> weeks = list(monthweeks(2006, 9, firstweekday=calendar.SUNDAY))
       >>> weeks[-1][-1]
       datetime.date(2006, 9, 30)
 
@@ -120,11 +117,30 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     it would send the mechanism into an infinite loop until it raised 
     OverflowError.  Lets make sure that doesn't happen again.
 
-      >>> weeks = list(monthweeks(daydate=date(2006, 12, 1)))
+      >>> weeks = list(monthweeks(daydate=date(2006, 12, 1), 
+      ...                         firstweekday=calendar.SUNDAY))
       >>> weeks[0][0]
-      datetime.date(2006, 11, 27)
+      datetime.date(2006, 11, 26)
       >>> weeks[-1][-1]
+      datetime.date(2007, 1, 6)
+      
+    And now for testing another year.
+    
+      >>> weeks = list(monthweeks(2007, 1, firstweekday=calendar.SUNDAY))
+      >>> weeks[0][0]
       datetime.date(2006, 12, 31)
+
+    One last test, lets cycle through the months over a multi-year period
+    and make sure we don't get any OverflowError's.
+    
+      >>> count = 0
+      >>> for year in range(2002, 2006):
+      ...     for month in range(1, 13):
+      ...         x = monthweeks(year, month, firstweekday=calendar.SUNDAY)
+      ...         x = monthweeks(year, month, firstweekday=calendar.MONDAY)
+      ...         count += 1
+      >>> count
+      48
 
     """
     
@@ -158,17 +174,29 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     nextday = day + ONEDAY
     weekday = calendar.weekday(day.year, day.month, day.day)
 
-    while (day.month <= firstdate.month and day.year <= firstdate.year) or \
-          (day.month > firstdate.month and weekday != firstweekday):
-
+    # see if block at bottom of while block for break conditions
+    max = 100
+    count = 0
+    while count < max:
         if weekday == firstweekday:
             week = []
             weeks.append(week)
         week.append(day)
         
+        if weekday == lastweekday:
+            if nextday.month > firstdate.month or \
+                  nextday.year > firstdate.year:
+                break
+
         day += ONEDAY
         nextday = day + ONEDAY
         weekday = calendar.weekday(day.year, day.month, day.day)
+
+        count += 1
+
+    if count == max:
+        raise OverflowError('Counted %i days for this interval which is '
+                            'not possible, something went wrong' % max)
 
     return (tuple(x) for x in weeks)
 
@@ -261,15 +289,14 @@ class MonthView(object):
         
         Start out by making sure we're able to get some weeks for today's
         date.
-        
+
+          >>> import calendar
           >>> mt = MonthView()
-          >>> len(mt.weeks(firstweekday=6)) > 1
-          True
 
         Now lets query known dates.
         
           >>> from datetime import datetime
-          >>> weeks = mt.weeks(datetime(2006, 2, 23), 0)
+          >>> weeks = mt.weeks(datetime(2006, 2, 23), calendar.MONDAY)
           >>> len(weeks)
           5
           
@@ -294,7 +321,7 @@ class MonthView(object):
           
         Make sure if we use a different weekday things still work.
         
-          >>> weeks = mt.weeks(datetime(2006, 2, 23), 0)
+          >>> weeks = mt.weeks(datetime(2006, 2, 23), calendar.MONDAY)
           >>> weeks[0]['days'][0]['day']
           30
           
