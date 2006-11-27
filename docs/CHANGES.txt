@@ -1,0 +1,39 @@
+====================
+p4a.calendar Changes
+====================
+
+
+p4a.calendar 1.0beta1 (unreleased)
+==================================
+
+Bugfixes
+--------
+
+* Day popup view now shows complete daily list of events instead of
+  just two, fixes issue #6 (Rocky Burt)
+
+* Fixed issue where times representing noon hour were improperly being
+  given the 'am' identifier, fixes #8, thanks to Bill Schindler
+  (Rocky Burt)
+
+* Made the week tuple generation (monthweeks) more robust again, fixes
+  issue #7 (Rocky Burt)
+
+* Fixed an issue where when using december getting the current set of
+  weeks would error out with OverflowError.  Resolves #5 (Rocky Burt)
+
+Features
+--------
+
+* Added new support interfaces (Rocky Burt)
+
+* Added links between views + add view (Lennart Regebro)
+
+* Added support for sticking in a content provider in the month view
+  (Lennart Regebro)
+
+
+p4a.audio 1.0alpha1 (2006-10-21)
+================================
+
+* First release with unrecorded set of functionality (Rocky Burt)

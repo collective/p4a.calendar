@@ -1,9 +1,0 @@
-Changelog for p4a.calendar
-
-    (name of developer listed in brackets)
-
-p4a.calendar - 0.1 Unreleased
-
-    - Initial package structure.
-      [zopeskel]
-
