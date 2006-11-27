@@ -33,7 +33,7 @@ Features
   (Lennart Regebro)
 
 
-p4a.audio 1.0alpha1 (2006-10-21)
-================================
+p4a.calendar 1.0alpha1 (2006-10-21)
+===================================
 
 * First release with unrecorded set of functionality (Rocky Burt)
