@@ -64,3 +64,15 @@ class IEvent(interface.Interface):
     type = schema.TextLine(title=u'Type',
                            required=True,
                            readonly=False)
+
+class IBasicCalendarSupport(interface.Interface):
+    """Provides certain information about calendar support.
+    """
+
+    support_enabled = schema.Bool(title=u'Calendar Support Enabled?',
+                                  required=True,
+                                  readonly=True)
+
+class ICalendarSupport(IBasicCalendarSupport):
+    """Provides full information about calendar support.
+    """
