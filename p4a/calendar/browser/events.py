@@ -6,6 +6,8 @@ try:
 except ImportError:
     from zope.pagetemplate.pagetemplatefile import PageTemplateFile
 
+from zope.component import queryMultiAdapter
+from zope.contentprovider.interfaces import IContentProvider
 from p4a.calendar import interfaces
 
 class EventListingView(object):
@@ -17,7 +19,8 @@ class EventListingView(object):
     def _getEventList(self, start=None, stop=None):
         provider = interfaces.IEventProvider(self.context)
         now = datetime.datetime.now()
-        events = list(provider.gather_events(start=start, stop=stop))
+        events = list(provider.gather_events(start=start, stop=stop, 
+                                             **self.request.form))
         events.sort()
         months = []
         month_info = []
@@ -60,3 +63,12 @@ class EventListingView(object):
     def event_creation_link(self, start=None, stop=None):
         provider = interfaces.IEventProvider(self.context)
         return provider.event_creation_link(start, stop)
+
+    def render_filter(self):
+        provider = queryMultiAdapter(
+            (self.context, self.request, self), 
+            IContentProvider, 'eventfilter')
+        if provider is None:
+            return ''
+        provider.update()
+        return provider.render()
