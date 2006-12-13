@@ -169,7 +169,7 @@ make it obvious.
 }
 
 .p4acalendar .meeting {
-    background: #cde2a7;
+    background: #ffaaaa;
 }
 
 .p4acalendar .socialevent {
@@ -181,11 +181,11 @@ make it obvious.
 }
 
 .p4acalendar .meetingcall {
-    background: #dee7ec;
+    background: #aaffaa;
 }
 
 .p4acalendar .pressevent {
-    background: #cde2a7;
+    background: #aaaaff;
 }
 
 .p4acalendar .legactivity {
