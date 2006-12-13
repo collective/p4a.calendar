@@ -463,31 +463,46 @@ class MonthView(object):
             dt = datetime.date(event.start.year, 
                                event.start.month,
                                event.start.day)
-            day = days[dt]
-            events = day['events']
-            allevents = day['allevents']
-
-            starthour, startampm = derive_ampmtime(event.start)
-            endhour, endampm = derive_ampmtime(event.end)
-
-            timespan = '%i:%02i%sm to %i:%02i%sm' % (starthour,
-                                                     event.start.minute,
-                                                     startampm,
-                                                     endhour,
-                                                     event.end.minute,
-                                                     endampm)            
+            dtend = datetime.date(event.end.year, 
+                                  event.end.month,
+                                  event.end.day)
+            dt_list = [dt]
+            while dt != dtend:
+                dt = dt + datetime.timedelta(1)
+                dt_list.append(dt)
             
-            event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
-                          'timespan': timespan,
-                          'local_url': event.local_url,
-                          'title': event.title,
-                          'description': event.description,
-                          'type': event.type}
-            if len(events) < 2:
-                day['events'].append(event_dict)
-            else:
-                day['has_more'] = True
-            allevents.append(event_dict)
+            for dt in dt_list:
+                day = days[dt]
+                events = day['events']
+                allevents = day['allevents']
+
+                if dt == dt_list[0]:
+                    starthour, startampm = derive_ampmtime(event.start)
+                else:
+                    starthour, startampm = 0, 'a'
+                if dt == dt_list[-1]:
+                    endhour, endampm = derive_ampmtime(event.end)
+                else:
+                    endhour, endampm = 12, 'p'
+    
+                timespan = '%i:%02i%sm to %i:%02i%sm' % (starthour,
+                                                         event.start.minute,
+                                                         startampm,
+                                                         endhour,
+                                                         event.end.minute,
+                                                         endampm)            
+                
+                event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
+                              'timespan': timespan,
+                              'local_url': event.local_url,
+                              'title': event.title,
+                              'description': event.description,
+                              'type': event.type}
+                if len(events) < 2:
+                    day['events'].append(event_dict)
+                else:
+                    day['has_more'] = True
+                allevents.append(event_dict)
             
     def month(self):
         return MONTHS[self.default_day.month]
