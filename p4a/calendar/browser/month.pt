@@ -55,9 +55,12 @@
 
   <div class="month"
        tal:define="icalview nocall:context/@@icalendar.ics">
-    <span style="float:right">
-      <a href="icalendar.ics" tal:condition="icalview/has_ical_support">
+    <span style="float:right" tal:condition="icalview/has_ical_support">
+      <a href="icalendar.ics">
          <img tal:attributes="src string:${portal_url}/icon_export_ical.png"/> Export
+      </a>
+      <a href="import.html">
+         <img src="++resource++p4aplonecalendar/icon_import_ical.png"/> Import
       </a>
     </span>
     <h1>
