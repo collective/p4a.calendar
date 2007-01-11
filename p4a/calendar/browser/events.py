@@ -31,6 +31,7 @@ class EventListingView(object):
             year = str(start.year)
             month_year = year+month
             if month_year != old_month_year:
+                old_month_year = month_year
                 if month_info:
                     months.append(month_info)
                 month_info = {'month': start.month,
