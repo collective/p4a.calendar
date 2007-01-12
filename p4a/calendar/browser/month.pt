@@ -11,7 +11,7 @@
   <style type="text/css" 
          media="all"
          tal:content=
-          "string: @import url(${context/++resource++p4acalendar/calendar.css});">
+          "string: @import url(${context/absolute_url}/++resource++p4acalendar/calendar.css);">
   </style>
   <script type="text/javascript" src="calendar.js"
           tal:attributes="src string:${context/++resource++p4acalendar/anchor-position.js}">
