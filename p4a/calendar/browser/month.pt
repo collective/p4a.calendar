@@ -97,7 +97,7 @@
             class="day"
             id="">
             
-            <tal:block tal:define="extra python:len(day['allevents']) - len(day['events'])">
+            <tal:block tal:define="extra python:len(day.allevents) - len(day.events)">
             
             <dl>
               <dt tal:condition="day/day">

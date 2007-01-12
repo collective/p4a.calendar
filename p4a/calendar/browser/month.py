@@ -227,6 +227,32 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
 
     return (tuple(x) for x in weeks)
 
+class ViewableDay(object):
+
+    def __init__(self, daydate):
+        self.allevents = []
+        self.extrastyleclass = ''
+        self.daydate = daydate
+
+    @property
+    def events(self):
+        return self.allevents[:2]
+
+    @property
+    def datestr(self):
+        return '%04i-%02i-%02i' % (self.daydate.year,
+                                   self.daydate.month,
+                                   self.daydate.day)
+
+    @property
+    def day(self):
+        return self.daydate.day
+
+    @property
+    def has_more(self):
+        return len(self.allevents) > 2
+
+
 class MonthView(object):
     """View for a month.
     """
@@ -329,27 +355,27 @@ class MonthView(object):
           
         First day of the week period should be an outside month day.
         
-          >>> weeks[0]['days'][0]['extrastyleclass']
+          >>> weeks[0]['days'][0].extrastyleclass
           ' outside-month first-week-day'
-          >>> weeks[0]['days'][0]['day']
+          >>> weeks[0]['days'][0].day
           30
 
-          >>> weeks[4]['days'][0]['extrastyleclass']
+          >>> weeks[4]['days'][0].extrastyleclass
           ' first-week-day'
-          >>> weeks[4]['days'][0]['day']
+          >>> weeks[4]['days'][0].day
           27
           
         Inspect the last day.  Should be outside the month as well.
         
-          >>> weeks[-1]['days'][-1]['extrastyleclass']
+          >>> weeks[-1]['days'][-1].extrastyleclass
           ' outside-month last-week-day last-month-day'
-          >>> weeks[-1]['days'][-1]['day']
+          >>> weeks[-1]['days'][-1].day
           5
           
         Make sure if we use a different weekday things still work.
         
           >>> weeks = mt.weeks(datetime(2006, 2, 23), calendar.MONDAY)
-          >>> weeks[0]['days'][0]['day']
+          >>> weeks[0]['days'][0].day
           30
           
         """
@@ -381,37 +407,29 @@ class MonthView(object):
                 week['extrastyleclass'] += ' last-week'
 
             for daypos, weekdate in enumerate(weektuple):
-                day = {'events': [],
-                       'allevents': [],
-                       'has_more': False}
+                day = ViewableDay(weekdate)
                 week['days'].append(day)
                 
                 alldays[weekdate] = day
                 
-                day['extrastyleclass'] = ''
-                day['day'] = weekdate.day
-                day['datestr'] = '%04i-%02i-%02i' % (weekdate.year,
-                                                     weekdate.month,
-                                                     weekdate.day)
-                
                 if weekdate == today:
-                    day['extrastyleclass'] += ' today'
+                    day.extrastyleclass += ' today'
 
                 if weekdate.month != daydate.month:
-                    day['extrastyleclass'] += ' outside-month'
+                    day.extrastyleclass += ' outside-month'
                     
                 if daypos == 0:
-                    day['extrastyleclass'] += ' first-week-day'
+                    day.extrastyleclass += ' first-week-day'
                 elif daypos == 6:
-                    day['extrastyleclass'] += ' last-week-day'
+                    day.extrastyleclass += ' last-week-day'
                     
                 if weekdate.month == daydate.month and weekdate.day == 1:
-                    day['extrastyleclass'] += ' first-month-day'
+                    day.extrastyleclass += ' first-month-day'
 
         # find the last day of the month and give it extra style class
         for day in reversed(weeks[-1]['days']):
-            if day['day'] is not None:
-                day['extrastyleclass'] += ' last-month-day'
+            if day.day is not None:
+                day.extrastyleclass += ' last-month-day'
                 break
         
         self._fill_events(alldays)
@@ -473,8 +491,8 @@ class MonthView(object):
             
             for dt in dt_list:
                 day = days[dt]
-                events = day['events']
-                allevents = day['allevents']
+                events = day.events
+                allevents = day.allevents
 
                 if dt == dt_list[0]:
                     starthour, startampm = derive_ampmtime(event.start)
@@ -498,10 +516,6 @@ class MonthView(object):
                               'title': event.title,
                               'description': event.description,
                               'type': event.type}
-                if len(events) < 2:
-                    day['events'].append(event_dict)
-                else:
-                    day['has_more'] = True
                 allevents.append(event_dict)
             
     def month(self):
