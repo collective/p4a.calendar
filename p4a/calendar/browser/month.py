@@ -1,3 +1,4 @@
+import BTrees
 import datetime
 import calendar
 from zope.component import queryMultiAdapter
@@ -230,9 +231,22 @@ def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
 class ViewableDay(object):
 
     def __init__(self, daydate):
-        self.allevents = []
+        self._eventset = None
         self.extrastyleclass = ''
         self.daydate = daydate
+
+    def add(self, obj):
+        # lazily set the eventset as a BTree
+        if self._eventset is None:
+            self._eventset = BTrees.OOBTree.OOTreeSet()
+        self._eventset.insert(obj)
+
+    @property
+    def allevents(self):
+        if self._eventset is None:
+            return []
+        all = list(self._eventset)
+        return all
 
     @property
     def events(self):
@@ -250,7 +264,7 @@ class ViewableDay(object):
 
     @property
     def has_more(self):
-        return len(self.allevents) > 2
+        return len(self._eventset) > 2
 
 
 class MonthView(object):
@@ -492,7 +506,6 @@ class MonthView(object):
             for dt in dt_list:
                 day = days[dt]
                 events = day.events
-                allevents = day.allevents
 
                 if dt == dt_list[0]:
                     starthour, startampm = derive_ampmtime(event.start)
@@ -516,8 +529,8 @@ class MonthView(object):
                               'title': event.title,
                               'description': event.description,
                               'type': event.type}
-                allevents.append(event_dict)
-            
+                day.add(event_dict)
+
     def month(self):
         return MONTHS[self.default_day.month]
     
