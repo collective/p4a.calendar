@@ -47,7 +47,7 @@ class EventProviderTestMixin(object):
             should_exist = i.start >= dt
             
             # Now check if it exists:
-            exists = 0
+            exists = False
             for j in gathered_events:
                 if (i.title == j.title and 
                     i.start == j.start and
