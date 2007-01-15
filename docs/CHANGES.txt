@@ -3,7 +3,7 @@ p4a.calendar Changes
 ====================
 
 
-p4a.calendar 1.0beta1 (unreleased)
+p4a.calendar 1.0alpha2 (2007-01-14)
 ==================================
 
 Bugfixes
