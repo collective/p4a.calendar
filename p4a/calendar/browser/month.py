@@ -498,6 +498,7 @@ class MonthView(object):
             dtend = datetime.date(event.end.year, 
                                   event.end.month,
                                   event.end.day)
+                        
             dt_list = [dt]
             while dt != dtend:
                 dt = dt + datetime.timedelta(1)
@@ -516,12 +517,13 @@ class MonthView(object):
                 else:
                     endhour, endampm = 12, 'p'
     
-                timespan = '%i:%02i%sm to %i:%02i%sm' % (starthour,
+                timespan = '%i:%02i%sm to %i:%02i%sm %s' % (starthour,
                                                          event.start.minute,
                                                          startampm,
                                                          endhour,
                                                          event.end.minute,
-                                                         endampm)            
+                                                         endampm,
+                                                         event.timezone)
                 
                 event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
                               'timespan': timespan,

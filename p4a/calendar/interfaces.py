@@ -64,6 +64,9 @@ class IEvent(interface.Interface):
     type = schema.TextLine(title=u'Type',
                            required=True,
                            readonly=False)
+    timezone = schema.TextLine(title=u'Timezone',
+                               required=True,
+                               readonly=True)
 
 class IBasicCalendarSupport(interface.Interface):
     """Provides certain information about calendar support.
