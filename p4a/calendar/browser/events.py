@@ -16,12 +16,15 @@ class EventListingView(object):
     
     eventlist = PageTemplateFile('events.pt')
     
-    def _getEventList(self, start=None, stop=None):
+    def _getEventList(self, start=None, stop=None, reverse=False):
         provider = interfaces.IEventProvider(self.context)
         now = datetime.datetime.now()
         events = list(provider.gather_events(start=start, stop=stop, 
                                              **self.request.form))
         events.sort()
+        # If this is an archive, revert the event list.
+        if reverse:
+            events.reverse()
         months = []
         month_info = []
         old_month_year = None
@@ -58,7 +61,7 @@ class EventListingView(object):
 
     def pastEvents(self):
         now = datetime.datetime.now()
-        months = self._getEventList(stop=now)
+        months = self._getEventList(stop=now, reverse=True)
         return self.eventlist(months=months, show_past=True)
 
     def event_creation_link(self, start=None, stop=None):
