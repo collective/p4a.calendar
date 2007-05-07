@@ -82,10 +82,13 @@
     <div class="standard-week-days">
       <tal:block tal:repeat="day view/standard_week_days">
       <div tal:attributes="class string:day ${day/extrastyleclass}"
-           tal:content="day/day"></div>
+           ><span tal:replace="day/day"></span></div>
       </tal:block>
-      <div class="visualClear"></div>
+      <div class="visualClear"><!-- --></div>
     </div>
+
+    <!-- bug in IE7 where sometimes it refuses to acknowledge the visualClear items -->
+    <br class="ie7-break" />
 
     <div tal:repeat="week view/weeks"
          class="week"
