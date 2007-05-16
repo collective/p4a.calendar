@@ -38,9 +38,10 @@
 }
 
 .p4acalendar .day-event-popup {
-    background-color: #f4f6bf;
-    position: absolute;
-    border: 1px black solid;
+  background-color: #f4f6bf;
+  position: absolute;
+  border: 1px black solid;
+  z-index: 40;
 }
 
 .p4acalendar .day-event-popup UL {
