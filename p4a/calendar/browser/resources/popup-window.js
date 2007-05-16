@@ -236,20 +236,19 @@ function PopupWindow_isClicked(e) {
                 }
             return false;
             }
-        else if (this.use_gebi && e) {
-            var t = e.originalTarget;
-            while (t.parentNode != null) {
-                if (t.id==this.divName) {
-                    return true;
-                    }
-                t = t.parentNode;
-                }
-            return false;
-            }
-        return false;
-        }
-    return false;
+	else if (this.use_gebi && e) {
+	    var t = e.target;
+	    if (t.parentNode == 3) { // Defeat Safari Bug
+		if (t.id==this.divName) {
+		    return true;
+		}
+		t = t.parentNode;
+	    }
+	    return false;
+	}
     }
+    return false;
+}
 
 // Check an onMouseDown event to see if we should hide
 function PopupWindow_hideIfNotClicked(e) {
