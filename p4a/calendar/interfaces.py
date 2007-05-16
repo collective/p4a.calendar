@@ -15,9 +15,8 @@ class ICalendarConfig(interface.Interface):
     """
     
     calendar_activated = schema.Bool(
-        title=u'Calendar Capabilities Activated',
-        description=u'Whether calendar capabilities are or should be '
-                    u'activated on this item'
+        title=u'Calendar settings',
+        description=u'Calendar activated for this folder'
         )
 
 class IEventProvider(interface.Interface):
