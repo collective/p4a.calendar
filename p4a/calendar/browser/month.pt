@@ -40,14 +40,17 @@
 
        <ul>
          <li tal:repeat="event day/allevents">
-           <dl>
+           <dl class="event">
              <dt>
-               <a href=""
+               <a class="event_title"
+                  href=""
                   tal:content="event/title"
                   tal:attributes="href event/local_url"></a>
              </dt>
              <dd tal:content="event/timespan"></dd>
-             <dd tal:content="event/description"></dd>
+             <dd class="location" tal:content="event/location"></dd>
+             <dd class="description" tal:content="event/description"></dd>
+            </dl>
          </li>
        </ul>
      </div>
@@ -75,7 +78,8 @@
 
     <tal:block replace="structure view/render_filter"/>
     <tal:block define="link view/event_creation_link" condition="python:link">
-       <a tal:attributes="href link">Create event</a> | </tal:block>
+       <a tal:attributes="href link">Create event</a> |
+    </tal:block>
     View: <a class="view_link" href="events.html">Event list</a> |
     <a class="view_link" href="past_events.html">Past events list</a>
     

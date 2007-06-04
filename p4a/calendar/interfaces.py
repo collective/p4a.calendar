@@ -57,6 +57,9 @@ class IEvent(interface.Interface):
     end = schema.Datetime(title=u'End Time',
                           required=False,
                           readonly=True)
+    location = schema.TextLine(title=u'Location',
+                               required=False,
+                               readonly=True)
     local_url = schema.TextLine(title=u'URL',
                                 required=True,
                                 readonly=True)

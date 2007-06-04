@@ -64,7 +64,7 @@
 }
 
 .p4acalendar .day-event-popup LI DD {
-    padding-left: 2em;
+    padding-left: 10px;
 }
 
 .p4acalendar .standard-week-days .day {
@@ -205,17 +205,65 @@ make it obvious.
 /* end grid */
 
 /* eventlist */
+.p4acalendar .eventlist .eventlist_month {
+    padding: 5px 0 5px 0;
+}
 
 .p4acalendar .eventlist H1 {
 }
 
-.p4acalendar .eventlist .event_details {
-    float: left;
-    width: 100px;
+.p4acalendar .eventlist H2 {
+	font-size: 1.25em;
 }
 
-.p4acalendar .eventlist .event_body {
+.p4acalendar .eventlist .event {
+	float: left;
+	width: 100%;
+	padding-bottom: 5px;
+}
+
+.p4acalendar .eventlist .event .event_details {
     float: left;
+    clear: right;
+    text-align: right;
+	font-weight: bold;
+    width: 15%;
+}
+
+.p4acalendar .eventlist .event .event_details ABBR {
+	border: none;
+}
+
+.p4acalendar .eventlist .event .event_details ABBR.dtend {
+	display: none;
+}
+
+.p4acalendar .event .location, .p4acalendar .day-event-popup .event .description {
+	font-size: 0.8em;
+}
+
+.p4acalendar .event .location {
+	color: #999;
+}
+
+.p4acalendar .eventlist .event .location {
+	border-top: 1px dashed #ccc;
+	padding-top: 3px;
+}
+
+.p4acalendar .eventlist .event .event_body {
+    float: right;
+    width: 83%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.p4acalendar .eventlist .event .event_title {
+	display: block;
+}
+
+.p4acalendar .eventlist .event .description {
+	padding-top: 3px;
 }
 
 .p4acalendar .eventlist A {

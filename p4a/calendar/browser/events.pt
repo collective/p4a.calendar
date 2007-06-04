@@ -32,8 +32,9 @@
      class="p4acalendar">
 
     <tal:block replace="structure view/render_filter"/>
-     <tal:block define="link view/event_creation_link" condition="python:link">
-       <a tal:attributes="href link">Create event</a> | </tal:block>
+    <tal:block define="link view/event_creation_link" condition="python:link">
+       <a tal:attributes="href link">Create event</a> |
+    </tal:block>
     View: <a class="view_link" href="month.html">Month</a> |
     <a class="view_link" href="events.html" tal:condition="options/show_past">
       Event list</a>
@@ -41,24 +42,26 @@
       tal:condition="not:options/show_past">
       Past events list</a>
 
+   <h1 tal:content="context/title_or_id">Title</h1>
    <div class="eventlist">
-     <div tal:repeat="month options/months">
-       <h1>
+     <div class="eventlist_month" tal:repeat="month options/months">
+       <h2>
          <tal:block content="month/month_name" i18n:translate=""/>
          <tal:block content="month/year"/>
-       </h1>
-       <div class="event" tal:repeat="event month/events">
+       </h2>
+       <div class="vevent event" tal:repeat="event month/events">
          <div class="event_details">
-           <tal:block content="month/month_name" i18n:translate=""/>
-           <tal:block content="event/day"/>
+           <abbr class="dtstart" title="2002-12-04" tal:attributes="title event/start/isoformat | default"><tal:block content="month/month_name" i18n:translate=""/> <tal:block content="event/start/day"/></abbr>
+           <abbr class="dtend" title="2002-12-04" tal:attributes="title event/end/isoformat | default">End Date</abbr>
          </div>
          <div class="event_body">
-           <a class="event_title" tal:content="event/title"
-              tal:attributes="href event/url" /><br/>
-           <tal:block content="event/description"/>
+           <a class="summary event_title" tal:content="event/title"
+              tal:attributes="href event/url" />
+           <div class="location" tal:content="event/location | default">Location</div>
+           <div class="description" tal:condition="event/description" tal:content="event/description"/>
          </div>
-         <div style="clear: both;"> </div>
        </div>
+       <div style="clear: both;"></div>
      </div>
    </div>
 

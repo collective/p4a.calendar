@@ -43,6 +43,9 @@ class EventListingView(object):
                               'events': []}
             event_dict = {'event': event,
                           'day': start.day,
+                          'start': start,
+                          'end': event.end,
+                          'location': event.location,
                           'title': event.title,
                           'description': event.description,
                           'url': event.local_url,

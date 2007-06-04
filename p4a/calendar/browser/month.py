@@ -490,7 +490,7 @@ class MonthView(object):
                                                      **self.request.form)
         return self._cached_events
 
-    def _fill_events(self, days):
+    def _fill_events(self, days, description_length=250, ellipsis='...'):
         for event in self._events:
             dt = datetime.date(event.start.year, 
                                event.start.month,
@@ -507,7 +507,16 @@ class MonthView(object):
             for dt in dt_list:
                 day = days[dt]
                 events = day.events
+                
+                description = event.description
 
+                if len(description)>description_length:
+                    description = description[:description_length]
+                    l = description.rfind(' ')
+                    if l > description_length/2:
+                        description = description[:l+1]
+                    description += ellipsis
+                    
                 if dt == dt_list[0]:
                     starthour, startampm = derive_ampmtime(event.start)
                 else:
@@ -529,7 +538,8 @@ class MonthView(object):
                               'timespan': timespan,
                               'local_url': event.local_url,
                               'title': event.title,
-                              'description': event.description,
+                              'location': event.location,
+                              'description': description,
                               'type': event.type}
                 day.add(event_dict)
 
