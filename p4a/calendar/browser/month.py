@@ -5,6 +5,10 @@ from zope.component import queryMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from p4a.calendar import interfaces
 
+from zope.i18n.locales import locales
+from zope.i18n.interfaces import  IUserPreferredLanguages
+                
+
 DAYS = [
         'Monday', 
         'Tuesday', 
@@ -33,70 +37,23 @@ MONTHS = [
 
 ONEDAY = datetime.timedelta(days=1)
 
-def derive_ampmtime(timeobj):
-    """Derives the 12 hour clock am/pm identifier and proper hour.
-    
-    Some random tests.
-    
-      >>> from datetime import time
-      
-      >>> derive_ampmtime(time(1, 30))
-      (1, 'a')
-      
-      >>> derive_ampmtime(time(13, 30))
-      (1, 'p')
-      
-      >>> derive_ampmtime(time(12, 01))
-      (12, 'p')
-
-      >>> derive_ampmtime(time(23, 59))
-      (11, 'p')
-
+def hour_time_formatter(self, timeobj):
+    """uses zope.i18n.locales to determine hour/min format
     """
     
-    hour = timeobj.hour
-    ampm = 'a'
-    if hour == 12:
-        ampm = 'p'
-    elif hour > 12:
-        hour -= 12
-        ampm = 'p'
-
-    return (hour, ampm)
-
-def tiny_time(dt):
-    """Return a clean label representing the given event.
+    #grab locale from request
+    languages = IUserPreferredLanguages(self.request)
+    langs = languages.getPreferredLanguages()
+    if langs:
+        parts = (langs[0].split('-') + [None,None])[:3]
+    else:
+        parts = (None,None,None)
+    locale = locales.getLocale(*parts)
     
-    Necessary imports.
+    #create formatted hour minute string
+    formatter = locale.dates.getFormatter('time', 'short')
+    return formatter.format(timeobj)
     
-      >>> from datetime import datetime
-      
-    Make sure the label is clean.
-    
-      >>> tiny_time(datetime(2006, 9, 30, 9, 30))
-      '9:30'
-      
-      >>> tiny_time(datetime(2006, 9, 30, 9, 0))
-      '9'
-
-      >>> tiny_time(datetime(2006, 9, 30, 13, 0))
-      '1p'
-
-      >>> tiny_time(datetime(2006, 9, 30, 13, 20))
-      '1:20p'
-    """
-    
-    hour, ampm = derive_ampmtime(dt)
-    if ampm == 'a':
-        ampm = ''
-    minutes = ''
-    if dt.minute != 0:
-        minutes = ':%02i' % dt.minute
-    
-    time = str(hour) + minutes + ampm
-    
-    return time
-
 def monthweeks(year=None, month=None, daydate=None, firstweekday=None):
     """Return an iterable of week tuples where each element in the week
     tuple is an instance of *datetime.date*.  If *daydate* is ommitted
@@ -516,25 +473,12 @@ class MonthView(object):
                     if l > description_length/2:
                         description = description[:l+1]
                     description += ellipsis
-                    
-                if dt == dt_list[0]:
-                    starthour, startampm = derive_ampmtime(event.start)
-                else:
-                    starthour, startampm = 0, 'a'
-                if dt == dt_list[-1]:
-                    endhour, endampm = derive_ampmtime(event.end)
-                else:
-                    endhour, endampm = 12, 'p'
     
-                timespan = '%i:%02i%sm to %i:%02i%sm %s' % (starthour,
-                                                         event.start.minute,
-                                                         startampm,
-                                                         endhour,
-                                                         event.end.minute,
-                                                         endampm,
+                timespan = '%s to %s %s' % (hour_time_formatter(self,event.start),
+                                                        hour_time_formatter(self,event.end),
                                                          event.timezone)
                 
-                event_dict = {'label': tiny_time(event.start) + ' ' + event.title,
+                event_dict = {'label': hour_time_formatter(self,event.start) + ' ' + event.title,
                               'timespan': timespan,
                               'local_url': event.local_url,
                               'title': event.title,
