@@ -122,6 +122,22 @@
     font-size: 1em;
 }
 
+/*
+	These are IE6 fixes.  The underscore hack is read by ONLY Windows IE6
+	and invalidates the CSS.
+*/
+
+.day dl dd {
+	_margin-bottom: 20px;
+	}
+	
+.p4acalendar .event-title {
+	_display: block;
+	_position: relative;
+	_overflow: hidden !important;
+	_width: 100%;
+	}
+
 /* grid start */
 /*
 The purpose here of a fancy grid is to make sure days that are not
