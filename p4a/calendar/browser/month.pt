@@ -3,7 +3,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="p4acalendar">
 
 <head>
 
@@ -78,7 +78,7 @@
 
     <tal:block replace="structure view/render_filter"/>
     <tal:block define="link view/event_creation_link" condition="python:link">
-       <a tal:attributes="href link">Create event</a> |
+       <a i18n:translate="create_event" tal:attributes="href link">Create event</a> |
     </tal:block>
     View: <a class="view_link" href="events.html">Event list</a> |
     <a class="view_link" href="past_events.html">Past events list</a>

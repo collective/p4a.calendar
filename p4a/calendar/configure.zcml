@@ -1,7 +1,10 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:meta="http://namespaces.zope.org/meta"
-    i18n_domain="Plone4Artists">
+    i18n_domain="Plone4Artists"
+    xmlns:i18n="http://namespaces.zope.org/i18n">
+
+  <i18n:registerTranslations directory="locales" />
 
   <permission
       id="zope.ManageContent"
