@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2007-10-14 12:28+0000\n"
+"POT-Creation-Date: 2007-10-14 14:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,5 +35,113 @@ msgstr ""
 #. Default: "View:"
 #: ../browser/month.pt
 msgid "view"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Monday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Tuesday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Wednesday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Thursday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Friday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Saturday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Sunday"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "N/A"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "January"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "February"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "March"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "April"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "May"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "June"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "July"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "August"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "September"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "October"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "November"
+msgstr ""
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "December"
+msgstr ""
+
+#: ../browser/month.pt
+msgid "export"
+msgstr ""
+
+#: ../browser/month.pt
+msgid "import"
 msgstr ""
 

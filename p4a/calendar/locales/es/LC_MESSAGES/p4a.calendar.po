@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: p4acalendar\n"
-"POT-Creation-Date: 2007-10-14 12:28+0000\n"
+"POT-Creation-Date: 2007-10-14 14:47+0000\n"
 "PO-Revision-Date: 2007-10-13 15:26 +0000\n"
 "Last-Translator: Roberto Allende <rover@menttes.com>\n"
 "Language-Team: Roberto Allende <rover@menttes.com>\n"
@@ -14,6 +14,106 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: p4a.calendar\n"
 
+#. Default: "View:"
+#: ../browser/month.py
+msgid "April"
+msgstr "Abril"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "August"
+msgstr "Agosto"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "December"
+msgstr "Diciembre"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "February"
+msgstr "Febrero"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Friday"
+msgstr "Viernes"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "January"
+msgstr "Enero"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "July"
+msgstr "Julio"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "June"
+msgstr "Junio"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "March"
+msgstr "Marzo"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "May"
+msgstr "Mayo"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Monday"
+msgstr "Lunes"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "N/A"
+msgstr "N/D"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "November"
+msgstr "Noviembre"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "October"
+msgstr "Octubre"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Saturday"
+msgstr "Sábado"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "September"
+msgstr "Septiembre"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Sunday"
+msgstr "Domingo"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Thursday"
+msgstr "Jueves"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Tuesday"
+msgstr "Martes"
+
+#. Default: "View:"
+#: ../browser/month.py
+msgid "Wednesday"
+msgstr "Miércoles"
+
 #. Default: "Create event"
 #: ../browser/month.pt
 msgid "create_event"
@@ -23,6 +123,14 @@ msgstr "Crear evento"
 #: ../browser/month.pt
 msgid "event_list"
 msgstr "lista de eventos"
+
+#: ../browser/month.pt
+msgid "export"
+msgstr "Exportar"
+
+#: ../browser/month.pt
+msgid "import"
+msgstr "Importar"
 
 #. Default: "Past events list"
 #: ../browser/month.pt
