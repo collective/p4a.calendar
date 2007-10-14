@@ -449,22 +449,29 @@ class MonthView(object):
 
     def _fill_events(self, days, description_length=250, ellipsis='...'):
         for event in self._events:
-            dt = datetime.date(event.start.year, 
+            dt = datetime.date(event.start.year,
                                event.start.month,
                                event.start.day)
-            dtend = datetime.date(event.end.year, 
+            dtend = datetime.date(event.end.year,
                                   event.end.month,
                                   event.end.day)
-                        
+
             dt_list = [dt]
             while dt != dtend:
                 dt = dt + datetime.timedelta(1)
                 dt_list.append(dt)
-            
+
             for dt in dt_list:
-                day = days[dt]
+                day = days.get(dt, None)
+                if day is None:
+                    # basically the date wasn't in our active month so
+                    # we set the date to the first day of the month
+                    randomday = days.itervalues().next().daydate
+                    newdate = datetime.date(randomday.year, randomday.month, 1)
+                    day = days[newdate]
+
                 events = day.events
-                
+
                 description = event.description
 
                 if len(description)>description_length:
