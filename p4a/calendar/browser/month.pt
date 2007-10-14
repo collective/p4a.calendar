@@ -114,7 +114,7 @@
               </dt>
               <dt tal:condition="not:day/day">&nbsp;</dt>
               <tal:block repeat="event day/events">
-                <dd tal:attributes="class event/type">
+                <dd tal:attributes="class string:event-item ${event/type}">
                   <a class="event-title" 
                      tal:content="event/label"
                      tal:attributes="href event/local_url;
