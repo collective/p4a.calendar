@@ -17,57 +17,57 @@ msgstr ""
 #. Default: "View:"
 #: ../browser/month.py
 msgid "April"
-msgstr ""
+msgstr "Απρίλιος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "August"
-msgstr ""
+msgstr "Αύγουστος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "December"
-msgstr ""
+msgstr "Δεκέμβριος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "February"
-msgstr ""
+msgstr "Φεβρουάριος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Friday"
-msgstr ""
+msgstr "Παρασκευή"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "January"
-msgstr ""
+msgstr "Ιανουάριος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "July"
-msgstr ""
+msgstr "Ιούλιος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "June"
-msgstr ""
+msgstr "Ιούνιος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "March"
-msgstr ""
+msgstr "Μάρτιος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "May"
-msgstr ""
+msgstr "Μάιος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Monday"
-msgstr ""
+msgstr "Δευτέρα"
 
 #. Default: "View:"
 #: ../browser/month.py
@@ -77,68 +77,68 @@ msgstr ""
 #. Default: "View:"
 #: ../browser/month.py
 msgid "November"
-msgstr ""
+msgstr "Νοέμβριος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "October"
-msgstr ""
+msgstr "Οκτώβριος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Saturday"
-msgstr ""
+msgstr "Σάββατο"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "September"
-msgstr ""
+msgstr "Σεπτέμβριος"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Sunday"
-msgstr ""
+msgstr "Κυριακή"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Thursday"
-msgstr ""
+msgstr "Πέμπτη"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Tuesday"
-msgstr ""
+msgstr "Τρίτη"
 
 #. Default: "View:"
 #: ../browser/month.py
 msgid "Wednesday"
-msgstr ""
+msgstr "Τετάρτη"
 
 #. Default: "Create event"
 #: ../browser/month.pt
 msgid "create_event"
-msgstr ""
+msgstr "Νέα εκδήλωση"
 
 #. Default: "Event list"
 #: ../browser/month.pt
 msgid "event_list"
-msgstr ""
+msgstr "Λίστα εκδηλώσεων"
 
 #: ../browser/month.pt
 msgid "export"
-msgstr ""
+msgstr "εξαγωγή"
 
 #: ../browser/month.pt
 msgid "import"
-msgstr ""
+msgstr "εισαγωγή"
 
 #. Default: "Past events list"
 #: ../browser/month.pt
 msgid "past_event_list"
-msgstr ""
+msgstr "Λίστα περασμένων εκδηλώσεων"
 
 #. Default: "View:"
 #: ../browser/month.pt
 msgid "view"
-msgstr ""
+msgstr "Προβολή:"
 
