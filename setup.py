@@ -3,11 +3,14 @@ import sys, os
 
 version = '1.0rc1'
 
+readme = open('README.txt')
+long_description = readme.read()
+readme.close()
+
 setup(name='p4a.calendar',
       version=version,
       description="Plone4Artists calendar abstraction library",
-      long_description="""p4a.calendar is a Python calendar library for
-dealing with calendars and events.""",
+      long_description=long_description,
       classifiers=[
           'Framework :: Zope3',
           'Programming Language :: Python',
@@ -24,7 +27,8 @@ dealing with calendars and events.""",
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          # -*- Extra requirements: -*-
+          'p4a.common>=1.0',
+          'p4a.z2utils>=1.0',
       ],
       entry_points="""
       # -*- Entry points: -*-
