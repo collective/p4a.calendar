@@ -44,7 +44,7 @@ class EventProviderTestMixin(object):
             # (It may be expected that events that start before the expected
             # date but continues after it should be included, but this is
             # generally more complicated).
-            should_exist = i.start >= dt
+            should_exist = i.end >= dt
             
             # Now check if it exists:
             exists = False

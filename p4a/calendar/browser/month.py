@@ -456,10 +456,12 @@ class MonthView(object):
                                   event.end.month,
                                   event.end.day)
 
-            dt_list = [dt]
+            dt_list = dt in days and [dt] or []
             while dt != dtend:
                 dt = dt + datetime.timedelta(1)
-                dt_list.append(dt)
+                if dt in days:
+                    # Don't append the date if it's outside the list of visible days
+                    dt_list.append(dt)
 
             for dt in dt_list:
                 day = days.get(dt, None)
