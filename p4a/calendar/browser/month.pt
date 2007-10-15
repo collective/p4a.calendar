@@ -3,7 +3,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="p4acalendar">
+      i18n:domain="p4a.calendar">
 
 <head>
 
@@ -60,10 +60,10 @@
        tal:define="icalview nocall:context/@@icalendar.ics">
     <span style="float:right" tal:condition="icalview/has_ical_support">
       <a href="icalendar.ics">
-         <img tal:attributes="src string:${portal_url}/icon_export_ical.png"/> Export
+         <img tal:attributes="src string:${portal_url}/icon_export_ical.png" /><span i18n:translate="export"> Export </span>
       </a>
       <a href="import.html">
-         <img src="++resource++p4aplonecalendar/icon_import_ical.png"/> Import
+         <img src="++resource++p4aplonecalendar/icon_import_ical.png" /><span i18n:translate="import"> Import </span>
       </a>
     </span>
     <h1>
@@ -80,8 +80,8 @@
     <tal:block define="link view/event_creation_link" condition="python:link">
        <a i18n:translate="create_event" tal:attributes="href link">Create event</a> |
     </tal:block>
-    View: <a class="view_link" href="events.html">Event list</a> |
-    <a class="view_link" href="past_events.html">Past events list</a>
+    <span i18n:translate="view">View:</span> <a class="view_link" href="events.html" i18n:translate="event_list">Event list</a> |
+    <a class="view_link" href="past_events.html" i18n:translate="past_event_list">Past events list</a>
     
     <div class="standard-week-days">
       <tal:block tal:repeat="day view/standard_week_days">

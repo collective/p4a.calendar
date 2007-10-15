@@ -3,7 +3,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="p4a.calendar">
 
 <head>
 
@@ -33,13 +33,13 @@
 
     <tal:block replace="structure view/render_filter"/>
     <tal:block define="link view/event_creation_link" condition="python:link">
-       <a tal:attributes="href link">Create event</a> |
+       <a tal:attributes="href link" i18n:translate="create_event">Create event</a> |
     </tal:block>
-    View: <a class="view_link" href="month.html">Month</a> |
+    <span i18n:translate="view">View:</span> <a class="view_link" href="month.html" i18n:translate="month">Month</a> |
     <a class="view_link" href="events.html" tal:condition="options/show_past">
       Event list</a>
     <a class="view_link" href="past_events.html" 
-      tal:condition="not:options/show_past">
+      tal:condition="not:options/show_past" i18n:translate="past_event_list">
       Past events list</a>
 
    <h1 tal:content="context/title_or_id">Title</h1>
@@ -51,7 +51,10 @@
        </h2>
        <div class="vevent event" tal:repeat="event month/events">
          <div class="event_details">
-           <abbr class="dtstart" title="2002-12-04" tal:attributes="title event/start/isoformat | default"><tal:block content="month/month_name" i18n:translate=""/> <tal:block content="event/start/day"/></abbr>
+           <abbr class="dtstart" title="2002-12-04" tal:attributes="title event/start/isoformat | default" i18n:translate="start_date">
+                 <tal:block content="month/month_name" i18n:name="start_month_name" />  
+                 <tal:block content="event/start/day" i18n:name="start_day_name" />
+           </abbr>
            <abbr class="dtend" title="2002-12-04" tal:attributes="title event/end/isoformat | default">End Date</abbr>
          </div>
          <div class="event_body">

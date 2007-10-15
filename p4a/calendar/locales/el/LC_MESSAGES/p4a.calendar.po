@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2007-10-14 14:47+0000\n"
+"POT-Creation-Date: 2007-10-14 15:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,6 +115,7 @@ msgid "Wednesday"
 msgstr "Τετάρτη"
 
 #. Default: "Create event"
+#: ../browser/events.pt
 #: ../browser/month.pt
 msgid "create_event"
 msgstr "Νέα εκδήλωση"
@@ -124,20 +125,34 @@ msgstr "Νέα εκδήλωση"
 msgid "event_list"
 msgstr "Λίστα εκδηλώσεων"
 
+#. Default: "Export"
 #: ../browser/month.pt
 msgid "export"
 msgstr "εξαγωγή"
 
+#. Default: "Import"
 #: ../browser/month.pt
 msgid "import"
 msgstr "εισαγωγή"
 
+#. Default: "Month"
+#: ../browser/events.pt
+msgid "month"
+msgstr ""
+
 #. Default: "Past events list"
+#: ../browser/events.pt
 #: ../browser/month.pt
 msgid "past_event_list"
 msgstr "Λίστα περασμένων εκδηλώσεων"
 
+#. Default: "${start_month_name} ${day_month_name}"
+#: ../browser/events.pt
+msgid "start_date"
+msgstr ""
+
 #. Default: "View:"
+#: ../browser/events.pt
 #: ../browser/month.pt
 msgid "view"
 msgstr "Προβολή:"

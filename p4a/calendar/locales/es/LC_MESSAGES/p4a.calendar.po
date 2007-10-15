@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: p4acalendar\n"
-"POT-Creation-Date: 2007-10-14 14:47+0000\n"
+"POT-Creation-Date: 2007-10-14 15:57+0000\n"
 "PO-Revision-Date: 2007-10-13 15:26 +0000\n"
 "Last-Translator: Roberto Allende <rover@menttes.com>\n"
 "Language-Team: Roberto Allende <rover@menttes.com>\n"
@@ -115,6 +115,7 @@ msgid "Wednesday"
 msgstr "Miércoles"
 
 #. Default: "Create event"
+#: ../browser/events.pt
 #: ../browser/month.pt
 msgid "create_event"
 msgstr "Crear evento"
@@ -124,21 +125,35 @@ msgstr "Crear evento"
 msgid "event_list"
 msgstr "lista de eventos"
 
+#. Default: "Export"
 #: ../browser/month.pt
 msgid "export"
 msgstr "Exportar"
 
+#. Default: "Import"
 #: ../browser/month.pt
 msgid "import"
 msgstr "Importar"
 
+#. Default: "Month"
+#: ../browser/events.pt
+msgid "month"
+msgstr "mes"
+
 #. Default: "Past events list"
+#: ../browser/events.pt
 #: ../browser/month.pt
 msgid "past_event_list"
 msgstr "Lista de eventos anteriores"
 
+#. Default: "${start_month_name} ${day_month_name}"
+#: ../browser/events.pt
+msgid "start_date"
+msgstr "$start_day_name de $start_month_name"
+
 #. Default: "View:"
+#: ../browser/events.pt
 #: ../browser/month.pt
 msgid "view"
-msgstr "Ver"
+msgstr "Ver:"
 

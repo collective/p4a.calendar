@@ -7,34 +7,33 @@ from p4a.calendar import interfaces
 
 from zope.i18n.locales import locales
 from zope.i18n.interfaces import  IUserPreferredLanguages
-                
 
 DAYS = [
-        'Monday', 
-        'Tuesday', 
-        'Wednesday', 
-        'Thursday', 
-        'Friday', 
-        'Saturday',
-        'Sunday',                 
+        _(u'Monday'), 
+        _(u'Tuesday'), 
+        _(u'Wednesday'), 
+        _(u'Thursday'), 
+        _(u'Friday'), 
+        _(u'Saturday'),
+        _(u'Sunday'),                 
         ]
 
 MONTHS = [
-          'N/A',
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
+          _(u'N/A'),
+          _(u'January'),
+          _(u'February'),
+          _(u'March'),
+          _(u'April'),
+          _(u'May'),
+          _(u'June'),
+          _(u'July'),
+          _(u'August'),
+          _(u'September'),
+          _(u'October'),
+          _(u'November'),
+          _(u'December'),
           ]
-
+                
 ONEDAY = datetime.timedelta(days=1)
 
 def hour_time_formatter(self, timeobj):
