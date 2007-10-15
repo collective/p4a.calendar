@@ -8,6 +8,10 @@ from p4a.calendar import interfaces
 from zope.i18n.locales import locales
 from zope.i18n.interfaces import  IUserPreferredLanguages
 
+from zope.i18nmessageid import MessageFactory
+_ = MessageFactory('p4a.calendar')                
+
+
 DAYS = [
         _(u'Monday'), 
         _(u'Tuesday'), 
