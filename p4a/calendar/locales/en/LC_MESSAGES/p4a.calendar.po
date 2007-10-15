@@ -29,6 +29,11 @@ msgstr ""
 msgid "December"
 msgstr ""
 
+#. Default: "Event list"
+#: ../browser/month.pt
+msgid "Event_list"
+msgstr ""
+
 #. Default: "View:"
 #: ../browser/month.py
 msgid "February"

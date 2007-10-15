@@ -28,6 +28,11 @@ msgstr ""
 msgid "event_list"
 msgstr ""
 
+#. Default: "Event list"
+#: ../browser/month.pt
+msgid "Event_list"
+msgstr ""
+
 #. Default: "Export"
 #: ../browser/month.pt
 msgid "export"

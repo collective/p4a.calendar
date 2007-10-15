@@ -36,7 +36,7 @@
        <a tal:attributes="href link" i18n:translate="create_event">Create event</a> |
     </tal:block>
     <span i18n:translate="view">View:</span> <a class="view_link" href="month.html" i18n:translate="month">Month</a> |
-    <a class="view_link" href="events.html" tal:condition="options/show_past">
+    <a class="view_link" href="events.html" tal:condition="options/show_past" i18n:translate="Event_list">
       Event list</a>
     <a class="view_link" href="past_events.html" 
       tal:condition="not:options/show_past" i18n:translate="past_event_list">
