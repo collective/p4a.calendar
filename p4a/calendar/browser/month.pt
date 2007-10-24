@@ -42,51 +42,60 @@
          <li tal:repeat="event day/allevents">
            <dl class="event">
              <dt>
-               <a class="event_title"
-                  href=""
-                  tal:content="event/title"
-                  tal:attributes="href event/local_url"></a>
-             </dt>
-             <dd tal:content="event/timespan"></dd>
-             <dd class="location" tal:content="event/location"></dd>
-             <dd class="description" tal:content="event/description"></dd>
+	       <a class="event_title"
+		  href=""
+		  tal:content="event/title"
+		  tal:attributes="href event/local_url" />
+	     </dt>
+             <dd tal:content="event/timespan" />
+             <dd class="location"
+		 tal:content="event/location" />
+             <dd class="description"
+		 tal:content="event/description" />
             </dl>
          </li>
        </ul>
      </div>
   </tal:block>
 
-  <div class="month"
-       tal:define="icalview nocall:context/@@icalendar.ics">
-    <span style="float:right" tal:condition="icalview/has_ical_support">
-      <a href="icalendar.ics">
-         <img tal:attributes="src string:${portal_url}/icon_export_ical.png" /><span i18n:translate="export"> Export </span>
-      </a>
-      <a href="import.html">
-         <img src="++resource++p4aplonecalendar/icon_import_ical.png" /><span i18n:translate="import"> Import </span>
-      </a>
-    </span>
-    <h1>
-      <a href=""
-         class="previous"
-         tal:attributes="href view/prev_month_link">&larr;</a>
-      <span tal:replace="view/month"></span> <span tal:replace="view/year"></span>
-      <a href=""
-         class="next"
-         tal:attributes="href view/next_month_link">&rarr;</a>
-    </h1>
+  <span style="float:right"
+	tal:define="icalview nocall:context/@@icalendar.ics"
+	tal:condition="icalview/has_ical_support">
+    <a href="icalendar.ics">
+      <img tal:attributes="src string:${portal_url}/icon_export_ical.png" /><span i18n:translate="export"> Export </span>
+    </a>
+    <a href="import.html">
+      <img src="++resource++p4aplonecalendar/icon_import_ical.png" /><span i18n:translate="import"> Import </span>
+    </a>
+  </span>
 
-    <tal:block replace="structure view/render_filter"/>
-    <tal:block define="link view/event_creation_link" condition="python:link">
-       <a i18n:translate="create_event" tal:attributes="href link">Create event</a> |
-    </tal:block>
-    <span i18n:translate="view">View:</span> <a class="view_link" href="events.html" i18n:translate="event_list">Event list</a> |
-    <a class="view_link" href="past_events.html" i18n:translate="past_event_list">Past events list</a>
+  <h1 class="documentFirstHeading">
+    <a href=""
+       class="previous"
+       tal:attributes="href view/prev_month_link">&larr;</a>
+    <span tal:replace="view/month"></span> <span tal:replace="view/year"></span>
+    <a href=""
+       class="next"
+       tal:attributes="href view/next_month_link">&rarr;</a>
+  </h1>
+
+  <div class="month">
+
+    <p>
+      <tal:block replace="structure view/render_filter"/>
+      <tal:block define="link view/event_creation_link" condition="python:link">
+	<a i18n:translate="create_event" tal:attributes="href link">Create event</a> |
+      </tal:block>
+      <span i18n:translate="view">View:</span> <a class="view_link" href="events.html" i18n:translate="event_list">Event list</a> |
+      <a class="view_link" href="past_events.html" i18n:translate="past_event_list">Past events list</a>
+    </p>
     
+    <br />
+
     <div class="standard-week-days">
       <tal:block tal:repeat="day view/standard_week_days">
       <div tal:attributes="class string:day ${day/extrastyleclass}"
-           ><span tal:replace="day/day"></span></div>
+           ><strong tal:content="day/day" /></div>
       </tal:block>
       <div class="visualClear"><!-- --></div>
     </div>

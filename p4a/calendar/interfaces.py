@@ -1,5 +1,7 @@
 from zope import interface
 from zope import schema
+from zope.i18nmessageid import MessageFactory
+_ = MessageFactory('p4a.calendar')  
 
 class IPossibleCalendar(interface.Interface):
     """A marker interface for representing what *could* be a calendar.
@@ -15,8 +17,10 @@ class ICalendarConfig(interface.Interface):
     """
     
     calendar_activated = schema.Bool(
-        title=u'Calendar settings',
-        description=u'Calendar activated for this folder'
+        title=_(u'calendar_activated_label',
+                default=u'Calendar settings'),
+        description=_(u'calendar_activated_desc',
+                      default=u'Calendar activated for this folder')
         )
 
 class IEventProvider(interface.Interface):
