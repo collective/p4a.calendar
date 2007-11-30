@@ -27,6 +27,7 @@ setup(name='p4a.calendar',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'setuptools',
           'p4a.common>=1.0',
           'p4a.z2utils>=1.0',
       ],
