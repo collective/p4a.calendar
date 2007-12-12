@@ -289,9 +289,9 @@ class MonthView(object):
           >>> mt = MonthView()
           >>> days = mt.standard_week_days(6)
           >>> days[0]
-          {'extrastyleclass': 'first-week-day', 'day': 'Sunday'}
+          {'extrastyleclass': 'first-week-day', 'day': u'Sunday'}
           >>> days[-1]
-          {'extrastyleclass': 'last-week-day', 'day': 'Saturday'}
+          {'extrastyleclass': 'last-week-day', 'day': u'Saturday'}
         """
         
         if firstweekday is None:
