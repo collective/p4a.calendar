@@ -86,7 +86,7 @@
       <tal:block define="link view/event_creation_link" condition="python:link">
 	<a i18n:translate="create_event" tal:attributes="href link">Create event</a> |
       </tal:block>
-      <span i18n:translate="view">View:</span> <a class="view_link" href="events.html" i18n:translate="event_list">Event list</a> |
+      <span i18n:translate="view">View:</span> Month | <a class="view_link" href="events.html" i18n:translate="event_list">Event list</a> |
       <a class="view_link" href="past_events.html" i18n:translate="past_event_list">Past events list</a>
     </p>
     
