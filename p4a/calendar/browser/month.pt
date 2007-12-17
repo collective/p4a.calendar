@@ -64,7 +64,7 @@
     <a href="icalendar.ics">
       <img tal:attributes="src string:${portal_url}/icon_export_ical.png" /><span i18n:translate="export"> Export </span>
     </a>
-    <a href="import.html">
+    <a tal:condition="view/event_creation_link" href="import.html">
       <img src="++resource++p4aplonecalendar/icon_import_ical.png" /><span i18n:translate="import"> Import </span>
     </a>
   </span>
