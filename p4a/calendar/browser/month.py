@@ -475,8 +475,6 @@ class MonthView(object):
                     newdate = datetime.date(randomday.year, randomday.month, 1)
                     day = days[newdate]
 
-                events = day.events
-
                 description = event.description
 
                 if len(description)>description_length:
@@ -485,10 +483,10 @@ class MonthView(object):
                     if l > description_length/2:
                         description = description[:l+1]
                     description += ellipsis
-    
-                timespan = '%s to %s %s' % (hour_time_formatter(self,event.start),
-                                                        hour_time_formatter(self,event.end),
-                                                         event.timezone)
+
+                timespan = '%s to %s %s' % (hour_time_formatter(self, event.start),
+                                            hour_time_formatter(self, event.end),
+                                            event.timezone)
                 
                 event_dict = {'label': hour_time_formatter(self,event.start) + ' ' + event.title,
                               'timespan': timespan,
