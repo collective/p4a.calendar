@@ -2,6 +2,23 @@
 p4a.calendar Changes
 ====================
 
+p4a.calendar 1.1 (2008-02-14)
+=============================
+
+New features
+------------
+
+* Support for Plone 3
+
+* Translations to german, french, spanish, norwegian and greek.
+
+Bugfixes
+--------
+
+* Various bugfixes, including #23: Grey out currently selected view
+
+
+
 p4a.calendar 1.0 (2007-10-14)
 =============================
 

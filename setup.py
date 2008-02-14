@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0'
+version = '1.1'
 
 readme = open('README.txt')
 long_description = readme.read()
@@ -28,7 +28,7 @@ setup(name='p4a.calendar',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'p4a.common>=1.0',
+          'p4a.common>=1.0.1',
           'p4a.z2utils>=1.0',
       ],
       entry_points="""
