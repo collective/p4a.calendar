@@ -27,5 +27,5 @@ Color coding by event type
 Maintainer
 ----------
 
-Rocky Burt (rocky AT serverzen DOT com) is the active maintainer of the
+Lennart Regebro (rocky (at) gmail.com) is the active maintainer of the
 *p4a.calendar* framework.
