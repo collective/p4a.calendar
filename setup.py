@@ -1,16 +1,20 @@
 from setuptools import setup, find_packages
-import sys, os
 
-version = '1.1'
+version = '1.2'
 
-readme = open('README.txt')
-long_description = readme.read()
-readme.close()
+f = open('README.txt')
+readme = f.read()
+f.close()
+
+f = open('CHANGES.txt')
+changes = f.read()
+f.close()
+
 
 setup(name='p4a.calendar',
       version=version,
       description="Plone4Artists calendar abstraction library",
-      long_description=long_description,
+      long_description=readme + '\n\n' + changes,
       classifiers=[
           'Framework :: Zope3',
           'Programming Language :: Python',
@@ -28,10 +32,7 @@ setup(name='p4a.calendar',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'p4a.common>=1.0.1',
-          'p4a.z2utils>=1.0',
+          'p4a.common >= 1.0.1, <= 1.0.9999',
+          'p4a.z2utils >=1.0, <= 1.0.9999',
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
       )

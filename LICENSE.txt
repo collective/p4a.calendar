@@ -1,4 +1,4 @@
-  p4a.calendar is copyright Rocky Burt
+  p4a.calendar is copyright Rocky Burt, Lennart Regebro, and Nate Aune.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by

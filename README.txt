@@ -1,8 +1,11 @@
+;-*-rst-*-
+
+============
 p4a.calendar
 ============
 
 Overview
---------
+========
 
 The *p4a.calendar* package is a package for producing calendars from
 collection of events. Features include:
@@ -22,10 +25,26 @@ Color coding by event type
   Events can be color coded based on what event type (keyword) they have 
   been assigned.
 
-  
 
-Maintainer
-----------
+Installation
+============
 
-Lennart Regebro (rocky (at) gmail.com) is the active maintainer of the
-*p4a.calendar* framework.
+  1. When you're reading this you have probably already run 
+     ``easy_install p4a.calendar``. Find out how to install setuptools
+     (and EasyInstall) here:
+     http://peak.telecommunity.com/DevCenter/EasyInstall
+
+  2. For installation into a Zope environment, create a file called 
+     ``p4a.calendar-configure.zcml`` in the 
+     ``/path/to/instance/etc/package-includes`` directory.  The file
+     should only contain this::
+
+        <include package="p4a.calendar" />
+
+
+Credits
+=======
+
+  * Maintainer, Lennart Regebro - regebro (at) gmail.com
+  * Rocky Burt - rocky (at) serverzen.com
+  * Nate Aune - natea (at) jazkarta.com
