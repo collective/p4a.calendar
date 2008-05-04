@@ -174,3 +174,8 @@ msgstr ""
 #: interfaces.py
 msgid "calendar_activated_desc"
 msgstr ""
+
+#. Default: "Wk#"
+#: ../browser/month.pt
+msgid "week_number"
+msgstr ""
