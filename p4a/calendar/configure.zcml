@@ -6,6 +6,4 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <include package=".browser" />
-
 </configure>
