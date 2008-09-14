@@ -4,15 +4,17 @@
 p4a.calendar
 ============
 
+TODO: Add some info here about how to install with buildout and what the dependencies are (see setup.py)
+
 Overview
 ========
 
 The *p4a.calendar* package is a package for producing calendars from
 collection of events. Features include:
 
-Monthly view
+Monthly, Weekly, Daily view
   Any calendar activated (smart) folder can has several default views
-  including a monthly view.
+  including a monthly, weekly and daily view.
 
 Chronological event view
   The events gathered together by the activated calendar can be displayed
