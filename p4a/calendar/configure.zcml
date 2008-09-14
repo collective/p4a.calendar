@@ -6,4 +6,7 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <include package="p4a.common" />
+  <include package="p4a.z2utils" />
+  
 </configure>
