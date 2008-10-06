@@ -5,7 +5,7 @@ p4a.calendar Changes
 ====================
 
 p4a.calendar 2.0a1 (2008-07-09)
-=============================
+===============================
 
 * Removed browser package and interfaces module (except some backwards
   compatibility) since these are provided by Dateable
@@ -64,7 +64,7 @@ Bugfixes
 * Various fixes
 
 p4a.calendar 1.0alpha2 (2007-01-14)
-==================================
+===================================
 
 Bugfixes
 --------
