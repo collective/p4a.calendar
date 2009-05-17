@@ -4,6 +4,15 @@
 p4a.calendar Changes
 ====================
 
+p4a.calendar 2.0a3 (2009-05-17)
+===============================
+
+* Fixed the reStructuredText so that the pypi page will render properly on 
+  the next release (lucielejard)
+  
+* Adding missing zcml slugs for p4a.common and p4a.z2utils (nate)
+
+
 p4a.calendar 2.0a1 (2008-07-09)
 ===============================
 
