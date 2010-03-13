@@ -1,114 +1,92 @@
-;-*-rst-*-
-
-====================
-p4a.calendar Changes
-====================
-
-p4a.calendar 2.0a4 (xxxx-xx-xx)
-===============================
-
-* Add Dutch translations [WouterVH]
+Changelog
+=========
 
 
-p4a.calendar 2.0a3 (2009-05-17)
-===============================
+unreleased (xxxx-xx-xx)
+-----------------------
 
-* Fixed the reStructuredText so that the pypi page will render properly on 
-  the next release (lucielejard)
-
-* Adding missing zcml slugs for p4a.common and p4a.z2utils (nate)
+- Add Dutch translations [WouterVH]
 
 
-p4a.calendar 2.0a1 (2008-07-09)
-===============================
+2.0a3 (2009-05-17)
+------------------
 
-* Removed browser package and interfaces module (except some backwards
-  compatibility) since these are provided by Dateable
+- Fixed the reStructuredText so that the pypi page will render properly on
+the next release [lucielejard]
 
-
-p4a.calendar 1.1 (2008-04-12)
-=============================
-
-* Updated documentation.
+- Adding missing zcml slugs for p4a.common and p4a.z2utils [nate]
 
 
-p4a.calendar 1.1b1 (2008-02-20)
-===============================
+2.0a1 (2008-07-09)
+------------------
 
-New features
-------------
-
-* Support for Plone 3
-
-* Translations to german, french, spanish, norwegian and greek.
-
-Bugfixes
---------
-
-* Various bugfixes, including #23: Grey out currently selected view
+- Removed browser package and interfaces module (except some backwards
+compatibility) since these are provided by Dateable
 
 
+1.1 (2008-04-12)
+----------------
 
-p4a.calendar 1.0 (2007-10-14)
-=============================
-
-Bugfixes
---------
-
-* Fixed issue #45: events that span across several months can now be viewed
-  properly on the ending month (Rocky Burt)
-
-* Fixed issue #42: days with multiple events show the events
-  overlapping in IE 6 (Rocky Burt)
-
-p4a.calendar 1.0rc1 (2007-07-31)
-================================
-
-Bugfixes
---------
-
-* Many bug fixes (resulting from Boston 2007 P4A sprint)
+- Updated documentation.
 
 
-p4a.calendar 1.0beta1 (2007-04-29)
-==================================
+1.1b1 (2008-02-20)
+------------------
 
-Bugfixes
---------
+- Support for Plone 3
 
-* Various fixes
+- Translations to german, french, spanish, norwegian and greek.
 
-p4a.calendar 1.0alpha2 (2007-01-14)
-===================================
-
-Bugfixes
---------
-
-* Day popup view now shows complete daily list of events instead of
-  just two, fixes issue #6 (Rocky Burt)
-
-* Fixed issue where times representing noon hour were improperly being
-  given the 'am' identifier, fixes #8, thanks to Bill Schindler
-  (Rocky Burt)
-
-* Made the week tuple generation (monthweeks) more robust again, fixes
-  issue #7 (Rocky Burt)
-
-* Fixed an issue where when using december getting the current set of
-  weeks would error out with OverflowError.  Resolves #5 (Rocky Burt)
-
-Features
---------
-
-* Added new support interfaces (Rocky Burt)
-
-* Added links between views + add view (Lennart Regebro)
-
-* Added support for sticking in a content provider in the month view
-  (Lennart Regebro)
+- Various bugfixes, including #23: Grey out currently selected view
 
 
-p4a.calendar 1.0alpha1 (2006-10-21)
-===================================
+1.0 (2007-10-14)
+----------------
 
-* First release with unrecorded set of functionality (Rocky Burt)
+- Fixed issue #45: events that span across several months can now be viewed
+properly on the ending month [Rocky Burt]
+
+- Fixed issue #42: days with multiple events show the events
+overlapping in IE 6 [Rocky Burt]
+
+
+1.0rc1 (2007-07-31)
+-------------------
+
+- Many bug fixes (resulting from Boston 2007 P4A sprint)
+
+
+1.0beta1 (2007-04-29)
+---------------------
+
+- Various fixes
+
+
+1.0alpha2 (2007-01-14)
+----------------------
+
+- Day popup view now shows complete daily list of events instead of
+just two, fixes issue #6 [Rocky Burt]
+
+- Fixed issue where times representing noon hour were improperly being
+given the 'am' identifier, fixes #8, thanks to Bill Schindler
+[Rocky Burt]
+
+- Made the week tuple generation (monthweeks) more robust again, fixes
+issue #7 [Rocky Burt]
+
+- Fixed an issue where when using december getting the current set of
+weeks would error out with OverflowError.  Resolves #5 [Rocky Burt]
+
+- Added new support interfaces [Rocky Burt]
+
+- Added links between views + add view [Lennart Regebro]
+
+- Added support for sticking in a content provider in the month view
+[Lennart Regebro]
+
+
+1.0alpha1 (2006-10-21)
+----------------------
+
+- First release with unrecorded set of functionality [Rocky Burt]

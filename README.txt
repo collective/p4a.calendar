@@ -1,5 +1,3 @@
-;-*-rst-*-
-
 ============
 p4a.calendar
 ============
@@ -19,7 +17,7 @@ Monthly, Weekly, Daily view
 Chronological event view
   The events gathered together by the activated calendar can be displayed
   using a chronological event listing.
-  
+
 Past events view
   Events that have already occurred are grouped into a past events listing page.
 
