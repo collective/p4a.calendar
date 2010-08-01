@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-unreleased (xxxx-xx-xx)
------------------------
+2.0a4 (2010-08-01)
+------------------
 
 - Add Dutch translations [WouterVH]
 
