@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '2.0a5dev'
+version = '2.1b2.dev0'
 
 f = open('README.txt')
 readme = f.read()
@@ -24,7 +24,7 @@ setup(name='p4a.calendar',
       keywords='Plone4Artists calendar event calendaring icalendar ical',
       author='Rocky Burt',
       author_email='rocky@serverzen.com',
-      url='http://www.plone4artists.org/products/plone4artistscalendar',
+      url='https://svn.plone.org/svn/collective/p4a/p4a.calendar/',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['p4a'],
